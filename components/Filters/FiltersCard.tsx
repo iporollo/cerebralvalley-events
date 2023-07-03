@@ -1,11 +1,9 @@
 import * as React from "react"
 
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -15,22 +13,38 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 export default function FiltersCard() {
   return (
     <Card className="my-4 border-[#e3e3e3] bg-transparent dark:border-[#313035]">
-      <CardHeader>
+      <CardHeader className="pb-4">
         <CardTitle>Filters</CardTitle>
       </CardHeader>
       <CardContent>
-        <RadioGroup defaultValue="option-one">
+        <CardDescription className="my-2">Event Type</CardDescription>
+        <RadioGroup defaultValue="allEvents">
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="option-one" id="option-one" />
-            <Label htmlFor="option-one">Option One</Label>
+            <RadioGroupItem value="allEvents" id="allEvents" />
+            <Label htmlFor="allEvents">All Events</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="option-two" id="option-two" />
-            <Label htmlFor="option-two">Option Two</Label>
+            <RadioGroupItem value="hackathons" id="hackathons" />
+            <Label htmlFor="hackathons">Hackathons</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="option-three" id="option-three" />
-            <Label htmlFor="option-three">Option Three</Label>
+            <RadioGroupItem value="co-working" id="co-working" />
+            <Label htmlFor="co-working">Co-Working</Label>
+          </div>
+        </RadioGroup>
+        <CardDescription className="mb-2 mt-6">Location</CardDescription>
+        <RadioGroup defaultValue="allLocations">
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="allLocations" id="allLocations" />
+            <Label htmlFor="allLocations">All Locations</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="SF" id="SF" />
+            <Label htmlFor="SF">San Francisco</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="NYC" id="NYC" />
+            <Label htmlFor="NYC">New York City</Label>
           </div>
         </RadioGroup>
       </CardContent>

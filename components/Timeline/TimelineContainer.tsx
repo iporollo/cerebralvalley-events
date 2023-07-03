@@ -8,12 +8,10 @@ import type { EventType } from "@/types/event"
 
 import TimelineRow from "./TimelineRow"
 
-//TODO: add filtering logic
-//TODO: add search logic
-
 const TimelineContainer = () => {
   const [events, setEvents] = useState<EventType[]>([])
-  const [filteredData, setFilteredData] = useState([])
+  const [isLoading, setIsLoading] = useState(true) // Loading state
+  // const [filteredData, setFilteredData] = useState([]);
 
   const eventObjMapper = (events: any[]) => {
     const mappedEvents: EventType[] = []
@@ -41,23 +39,18 @@ const TimelineContainer = () => {
     const response = await EventService.fetchUpcomingEvents()
     setEvents(eventObjMapper(response))
     // setFilteredData(data) // Set initial filtered data same as the initial data
+    setIsLoading(false) // Data has been fetched, set loading to false
   }
-
-  //   const filterData = () => {
-  //     // Apply filtering logic to update filteredData state
-  //     // e.g., filter based on a condition or user input
-  //     const filtered = data.filter((item) => {
-  //       // Your filtering condition goes here
-  //       return item.someProperty === "someValue"
-  //     })
-  //     setFilteredData(filtered)
-  //   }
 
   return (
     <div className="mx-8">
-      {events.map((event) => (
-        <TimelineRow key={event.id} event={event} />
-      ))}
+      {isLoading ? (
+        <div>Loading...</div> // Loading state
+      ) : events.length === 0 ? (
+        <div>No events found</div> // Empty state
+      ) : (
+        events.map((event) => <TimelineRow key={event.id} event={event} />)
+      )}
     </div>
   )
 }
