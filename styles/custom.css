@@ -1,0 +1,11 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.light-background-gradient {
+  @apply bg-gradient-to-t from-stone-300	via-slate-200 to-stone-100;
+}
+
+.dark-background-gradient {
+  background-color: hsl(252 9.8% 10%);
+}

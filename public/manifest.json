@@ -1,0 +1,15 @@
+{
+  "name": "Cerebral Valley",
+  "short_name": "Cerebral Valley",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000",
+  "description": "A community of founders and builders creating the next generation of technology.",
+  "icons": [
+    {
+      "src": "/cerebralvalley.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}
