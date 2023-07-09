@@ -30,6 +30,18 @@ class EventService {
     allRecords = Array.from(records)
     return allRecords
   }
+
+  async fetchPastEvents() {
+    let allRecords: any[] = []
+
+    const records = await this.base(AirtableTables.EVENTS_TABLE)
+      .select({ view: AirtableTableEventViews.PAST_EVENTS })
+      .all()
+
+    // Hack: setting to an array of type any[] to bypass TypeScript
+    allRecords = Array.from(records)
+    return allRecords
+  }
 }
 
 const eventService = new EventService()

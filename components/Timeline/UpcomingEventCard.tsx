@@ -19,15 +19,15 @@ export default function UpcomingEventCard({ event }: { event: EventType }) {
             {event.event}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
+              width="19"
+              height="19"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              className="feather feather-arrow-up-right mb-1 ml-1 inline"
+              strokeWidth="2.25"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-arrow-up-right ml-1 inline opacity-40"
             >
               <line x1="7" y1="17" x2="17" y2="7"></line>
               <polyline points="7 7 17 7 17 17"></polyline>
@@ -36,14 +36,14 @@ export default function UpcomingEventCard({ event }: { event: EventType }) {
           <p className="text-base font-normal text-[#6f737c]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="15.5"
-              height="15.5"
+              width="17.5"
+              height="17.5"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className="feather feather-map-pin mb-1 mr-2.5 inline opacity-80"
             >
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -52,9 +52,9 @@ export default function UpcomingEventCard({ event }: { event: EventType }) {
             {event.location}
           </p>
           {event.tags && event.tags.length > 0 && (
-            <p className="mt-2">
+            <div className="mb-1 mt-2">
               <Badge>{event.tags}</Badge>
-            </p>
+            </div>
           )}
         </a>
       </div>

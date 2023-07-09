@@ -68,11 +68,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               `,
           }}
         />
-        <script
-          type="text/javascript"
-          async
-          src="https://s3.us-west-2.amazonaws.com/jsma/TwQOE7R/ma.js"
-        ></script>
       </head>
       <PostHogProvider>
         <body
