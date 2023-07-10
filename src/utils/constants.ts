@@ -28,6 +28,24 @@ enum AirtableTableSponsorColumns {
   MESSAGE = "Message",
 }
 
+enum EventState {
+  PAST = "PAST",
+  UPCOMING = "UPCOMING",
+}
+
+enum EventTypes {
+  ALL = "ALL_EVENTS",
+  CO_WORKING = "Co-Working",
+  HACKATHON = "Hackathon",
+}
+
+enum LocationTypes {
+  ALL = "ALL_LOCATIONS",
+  SF = "San Francisco, CA",
+  NYC = "New York, NY",
+  REMOTE = "Remote",
+}
+
 export {
   AIRTABLE_EVENTS_BASE,
   AIRTABLE_SPONSORS_BASE,
@@ -35,4 +53,7 @@ export {
   AirtableTableEventViews,
   AirtableTableEventColumns,
   AirtableTableSponsorColumns,
+  EventState,
+  EventTypes,
+  LocationTypes,
 }

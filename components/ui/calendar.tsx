@@ -1,6 +1,7 @@
 "use client"
 
-import * as React from "react"
+import { useState } from "react"
+import useStore from "@/src/store"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
 
@@ -15,6 +16,17 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
+  const dateFilter = useStore((state: any) => state.dateFilter)
+  const setDateFilter = useStore((state: any) => state.setDateFilter)
+
+  const handleDateSelect = (day: Date | undefined) => {
+    if (day) {
+      setDateFilter(new Date(day))
+    } else {
+      setDateFilter(undefined)
+    }
+  }
+
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -55,6 +67,10 @@ function Calendar({
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
       }}
+      mode="single"
+      selected={dateFilter}
+      // @ts-ignore
+      onSelect={handleDateSelect}
       {...props}
     />
   )

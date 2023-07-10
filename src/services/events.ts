@@ -4,6 +4,7 @@ import {
   AirtableTableEventColumns,
   AirtableTableEventViews,
   AirtableTables,
+  EventTypes,
 } from "src/utils/constants"
 
 class EventService {
@@ -19,23 +20,28 @@ class EventService {
     this.base = Airtable.base(AIRTABLE_EVENTS_BASE)
   }
 
-  async fetchUpcomingEvents() {
+  async fetchEvents(showPastEvents: boolean, dateFilter: Date | undefined) {
+    console.log(dateFilter)
     let allRecords: any[] = []
+    let view = showPastEvents
+      ? AirtableTableEventViews.PAST_EVENTS
+      : AirtableTableEventViews.UPCOMING_EVENTS
+
+    const filterLogic =
+      dateFilter &&
+      `IS_SAME({${
+        AirtableTableEventColumns.START
+      }}, "${dateFilter.toISOString()}", 'day')`
+
+    let options = { view }
+
+    if (filterLogic) {
+      // @ts-ignore
+      options.filterByFormula = filterLogic
+    }
 
     const records = await this.base(AirtableTables.EVENTS_TABLE)
-      .select({ view: AirtableTableEventViews.UPCOMING_EVENTS })
-      .all()
-
-    // Hack: setting to an array of type any[] to bypass TypeScript
-    allRecords = Array.from(records)
-    return allRecords
-  }
-
-  async fetchPastEvents() {
-    let allRecords: any[] = []
-
-    const records = await this.base(AirtableTables.EVENTS_TABLE)
-      .select({ view: AirtableTableEventViews.PAST_EVENTS })
+      .select(options)
       .all()
 
     // Hack: setting to an array of type any[] to bypass TypeScript

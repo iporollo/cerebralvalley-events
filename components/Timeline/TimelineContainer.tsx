@@ -3,7 +3,11 @@
 import React, { useEffect, useState } from "react"
 import useStore from "@/src/store"
 import EventService from "src/services/events"
-import { AirtableTableEventColumns } from "src/utils/constants"
+import {
+  AirtableTableEventColumns,
+  EventTypes,
+  LocationTypes,
+} from "src/utils/constants"
 
 import type { EventType } from "@/types/event"
 import { Card, CardContent } from "@/components/ui/card"
@@ -13,30 +17,37 @@ import TimelineRow from "./TimelineRow"
 
 const TimelineContainer = () => {
   const showPastEvents = useStore((state: any) => state.showPastEvents)
-  const [events, setEvents] = useState<EventType[]>([])
-  const [isLoading, setIsLoading] = useState(true) // Loading state
-  // const [filteredData, setFilteredData] = useState([]);
+  const dateFilter = useStore((state: any) => state.dateFilter)
+  const eventTypeFilters = useStore((state: any) => state.eventTypeFilters)
+  const locationTypeFilters = useStore(
+    (state: any) => state.locationTypeFilters
+  )
 
-  const fetchData = async () => {
-    setIsLoading(true) // Loading state is set to true
-    let response
-    if (showPastEvents) {
-      response = await EventService.fetchPastEvents()
-    } else {
-      response = await EventService.fetchUpcomingEvents()
-    }
-    setEvents(eventObjMapper(response))
-    // setFilteredData(data) // Set initial filtered data same as the initial data
-    setIsLoading(false) // Data has been fetched, set loading to false
+  const [events, setEvents] = useState<EventType[]>([])
+  const [clientFilteredEvents, setClientFilteredEvents] = useState<EventType[]>(
+    []
+  )
+  const [isLoading, setIsLoading] = useState(true)
+
+  const fetchData = async (dateFilter: Date | undefined) => {
+    setIsLoading(true)
+
+    const response = await EventService.fetchEvents(showPastEvents, dateFilter)
+    const mappedEvents = eventObjMapper(response)
+
+    setEvents(mappedEvents)
+    setClientFilteredEvents(clientFilter(mappedEvents))
+
+    setIsLoading(false)
   }
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    setClientFilteredEvents(clientFilter(events))
+  }, [eventTypeFilters, locationTypeFilters])
 
   useEffect(() => {
-    fetchData()
-  }, [showPastEvents])
+    fetchData(dateFilter)
+  }, [dateFilter, showPastEvents])
 
   const eventObjMapper = (events: any[]) => {
     const mappedEvents: EventType[] = []
@@ -56,6 +67,31 @@ const TimelineContainer = () => {
     return mappedEvents
   }
 
+  const clientFilter = (events: EventType[]) => {
+    let filteredEvents = events
+    if (!eventTypeFilters.includes(EventTypes.ALL)) {
+      filteredEvents = filteredEvents.filter((event) => {
+        for (let i = 0; i < eventTypeFilters.length; i++) {
+          if (event.tags?.includes(eventTypeFilters[i])) {
+            return true
+          }
+        }
+        return false
+      })
+    }
+    if (!locationTypeFilters.includes(LocationTypes.ALL)) {
+      filteredEvents = filteredEvents.filter((event) => {
+        for (let i = 0; i < locationTypeFilters.length; i++) {
+          if (event.location === locationTypeFilters[i]) {
+            return true
+          }
+        }
+        return false
+      })
+    }
+    return filteredEvents
+  }
+
   return (
     <div className="mx-8">
       {isLoading ? (
@@ -67,10 +103,12 @@ const TimelineContainer = () => {
             </div>
           </div>
         </div>
-      ) : events.length === 0 ? (
+      ) : clientFilteredEvents.length === 0 ? (
         <div>No events found</div> // Empty state
       ) : (
-        events.map((event) => <TimelineRow key={event.id} event={event} />)
+        clientFilteredEvents.map((event) => (
+          <TimelineRow key={event.id} event={event} />
+        ))
       )}
     </div>
   )

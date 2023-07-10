@@ -1,17 +1,18 @@
 "use client"
 
 import useStore from "@/src/store"
+import { EventState } from "@/src/utils/constants"
 
+import { Calendar } from "@/components/ui/calendar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import FilterCalendar from "@/components/Filters/FilterCalendar"
 import FilterCard from "@/components/Filters/FiltersCard"
 import Search from "@/components/Search"
 
 export default async function Filters() {
   const setShowPastEvents = useStore((state: any) => state.setShowPastEvents)
 
-  const handleTabChange = (type: "upcoming" | "past") => {
-    if (type === "past") {
+  const handleTabChange = (type: EventState.UPCOMING | EventState.PAST) => {
+    if (type === EventState.PAST) {
       setShowPastEvents(true)
     } else {
       setShowPastEvents(false)
@@ -20,16 +21,19 @@ export default async function Filters() {
   return (
     <div className="mx-8">
       {/* <Search /> */}
-      <FilterCalendar />
-      <Tabs defaultValue="upcoming">
+      <Calendar />
+      <Tabs defaultValue={EventState.UPCOMING}>
         <TabsList className="grid w-full grid-cols-2 border-[#e3e3e3] bg-gray-200 dark:border-[#313035] dark:bg-[#27262b]">
           <TabsTrigger
-            onClick={() => handleTabChange("upcoming")}
-            value="upcoming"
+            onClick={() => handleTabChange(EventState.UPCOMING)}
+            value={EventState.UPCOMING}
           >
             Upcoming
           </TabsTrigger>
-          <TabsTrigger onClick={() => handleTabChange("past")} value="past">
+          <TabsTrigger
+            onClick={() => handleTabChange(EventState.PAST)}
+            value={EventState.PAST}
+          >
             Past
           </TabsTrigger>
         </TabsList>
