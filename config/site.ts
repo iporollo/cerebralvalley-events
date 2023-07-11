@@ -16,12 +16,8 @@ export const siteConfig: SiteConfig = {
     "A community of founders and builders creating the next generation of technology.",
   mainNav: [
     {
-      title: "Events",
-      href: "https://cerebralvalley.ai/events",
-    },
-    {
-      title: "Sponsors",
-      href: "/sponsors",
+      title: "Google Sheet",
+      href: "https://docs.google.com/spreadsheets/d/1P6ut7vL-gXKbeDeh3nuPqBjoCupjIt87Sw7TnhumBSU/edit#gid=1781893986",
     },
   ],
   links: {
