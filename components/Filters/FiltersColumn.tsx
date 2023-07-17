@@ -6,9 +6,8 @@ import { EventState } from "@/src/utils/constants"
 import { Calendar } from "@/components/ui/calendar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FilterCard from "@/components/Filters/FiltersCard"
-import Search from "@/components/Search"
 
-export default async function Filters() {
+export default async function FiltersColumn() {
   const setShowPastEvents = useStore((state: any) => state.setShowPastEvents)
 
   const handleTabChange = (type: EventState.UPCOMING | EventState.PAST) => {
@@ -19,7 +18,7 @@ export default async function Filters() {
     }
   }
   return (
-    <div className="mx-8">
+    <div className="mx-8 hidden flex-col md:mx-2 md:flex">
       {/* <Search /> */}
       <Calendar />
       <Tabs defaultValue={EventState.UPCOMING}>
