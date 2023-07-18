@@ -1,4 +1,5 @@
 import Airtable from "airtable"
+import { DateRange } from "react-day-picker"
 import {
   AIRTABLE_EVENTS_BASE,
   AirtableTableEventColumns,
@@ -20,24 +21,38 @@ class EventService {
     this.base = Airtable.base(AIRTABLE_EVENTS_BASE)
   }
 
-  async fetchEvents(showPastEvents: boolean, dateFilter: Date | undefined) {
-    console.log(dateFilter)
+  async fetchEvents(
+    showPastEvents: boolean,
+    dateRangeFilter: DateRange | undefined
+  ) {
     let allRecords: any[] = []
     let view = showPastEvents
       ? AirtableTableEventViews.PAST_EVENTS
       : AirtableTableEventViews.UPCOMING_EVENTS
-
-    const filterLogic =
-      dateFilter &&
-      `IS_SAME({${
-        AirtableTableEventColumns.START
-      }}, "${dateFilter.toISOString()}", 'day')`
-
     let options = { view }
 
-    if (filterLogic) {
+    let dateFilterLogic = ""
+
+    const startDateFilter = dateRangeFilter?.from
+
+    if (startDateFilter) {
+      const endDateFilter = dateRangeFilter?.to || startDateFilter
+
+      dateFilterLogic = `AND(
+      	OR(IS_SAME({${
+          AirtableTableEventColumns.START
+        }}, "${startDateFilter.toISOString()}", "day"), IS_AFTER({${
+        AirtableTableEventColumns.START
+      }}, "${startDateFilter.toISOString()}")),
+      	OR(IS_SAME({${
+          AirtableTableEventColumns.END
+        }}, "${endDateFilter.toISOString()}", "day"), IS_BEFORE({${
+        AirtableTableEventColumns.END
+      }}, "${endDateFilter.toISOString()}"))
+        )`
+
       // @ts-ignore
-      options.filterByFormula = filterLogic
+      options.filterByFormula = dateFilterLogic
     }
 
     const records = await this.base(AirtableTables.EVENTS_TABLE)

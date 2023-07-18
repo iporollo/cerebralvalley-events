@@ -19,14 +19,6 @@ function Calendar({
   const dateFilter = useStore((state: any) => state.dateFilter)
   const setDateFilter = useStore((state: any) => state.setDateFilter)
 
-  const handleDateSelect = (day: Date | undefined) => {
-    if (day) {
-      setDateFilter(new Date(day))
-    } else {
-      setDateFilter(undefined)
-    }
-  }
-
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
@@ -67,10 +59,10 @@ function Calendar({
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
       }}
-      mode="single"
+      mode="range"
       selected={dateFilter}
       // @ts-ignore
-      onSelect={handleDateSelect}
+      onSelect={setDateFilter}
       {...props}
     />
   )

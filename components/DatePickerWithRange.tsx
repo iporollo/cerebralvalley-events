@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import useStore from "@/src/store"
 import { addDays, format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 import { DateRange } from "react-day-picker"
@@ -24,6 +25,13 @@ export function DatePickerWithRange({
     from: today,
     to: weekFromToday,
   })
+
+  const setDateFilter = useStore((state: any) => state.setDateFilter)
+
+  function handleSelectDate(selectedDateRange: DateRange | undefined) {
+    setDate(selectedDateRange)
+    setDateFilter(selectedDateRange)
+  }
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -57,7 +65,9 @@ export function DatePickerWithRange({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={(selectedDateRange) => {
+              handleSelectDate(selectedDateRange)
+            }}
             numberOfMonths={1}
           />
         </PopoverContent>

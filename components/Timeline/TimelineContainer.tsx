@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import useStore from "@/src/store"
+import { DateRange } from "react-day-picker"
 import EventService from "src/services/events"
 import {
   AirtableTableEventColumns,
@@ -29,10 +30,13 @@ const TimelineContainer = () => {
   )
   const [isLoading, setIsLoading] = useState(true)
 
-  const fetchData = async (dateFilter: Date | undefined) => {
+  const fetchData = async (dateRangeFilter?: DateRange) => {
     setIsLoading(true)
 
-    const response = await EventService.fetchEvents(showPastEvents, dateFilter)
+    const response = await EventService.fetchEvents(
+      showPastEvents,
+      dateRangeFilter
+    )
     const mappedEvents = eventObjMapper(response)
 
     setEvents(mappedEvents)
