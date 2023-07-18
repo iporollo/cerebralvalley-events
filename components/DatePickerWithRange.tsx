@@ -3,8 +3,7 @@
 import * as React from "react"
 import useStore from "@/src/store"
 import { addDays, format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
-import { DateRange } from "react-day-picker"
+import { Calendar as CalendarIcon, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -27,14 +26,11 @@ export function DatePickerWithRange({
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
-        <PopoverTrigger asChild>
+        <PopoverTrigger className="w-max" asChild>
           <Button
             id="date"
             variant={"outline"}
-            className={cn(
-              "w-[180px] justify-start text-left font-normal",
-              !dateFilter && "text-muted-foreground"
-            )}
+            className={cn("justify-start text-left font-normal")}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {dateFilter?.from ? (
@@ -49,6 +45,7 @@ export function DatePickerWithRange({
             ) : (
               <span>Filter by date</span>
             )}
+            <ChevronDown className="h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
