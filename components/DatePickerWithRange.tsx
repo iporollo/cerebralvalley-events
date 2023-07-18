@@ -21,17 +21,8 @@ export function DatePickerWithRange({
   const today = new Date()
   const weekFromToday = addDays(today, 7)
 
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: today,
-    to: weekFromToday,
-  })
-
+  const dateFilter = useStore((state: any) => state.dateFilter)
   const setDateFilter = useStore((state: any) => state.setDateFilter)
-
-  function handleSelectDate(selectedDateRange: DateRange | undefined) {
-    setDate(selectedDateRange)
-    setDateFilter(selectedDateRange)
-  }
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -41,33 +32,32 @@ export function DatePickerWithRange({
             id="date"
             variant={"outline"}
             className={cn(
-              "w-[160px] justify-start text-left font-normal",
-              !date && "text-muted-foreground"
+              "w-[180px] justify-start text-left font-normal",
+              !dateFilter && "text-muted-foreground"
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {date?.from ? (
-              date.to ? (
+            {dateFilter?.from ? (
+              dateFilter.to ? (
                 <>
-                  {format(date.from, "LLL dd")} - {format(date.to, "LLL dd")}
+                  {format(dateFilter.from, "LLL dd")} -{" "}
+                  {format(dateFilter.to, "LLL dd")}
                 </>
               ) : (
-                format(date.from, "LLL dd")
+                format(dateFilter.from, "LLL dd")
               )
             ) : (
-              <span>Pick a date</span>
+              <span>Filter by date</span>
             )}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
-            initialFocus
+            initialFocus // Not sure what this does... but it was in the shadcn example
             mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={(selectedDateRange) => {
-              handleSelectDate(selectedDateRange)
-            }}
+            defaultMonth={dateFilter?.from}
+            selected={dateFilter}
+            onSelect={setDateFilter}
             numberOfMonths={1}
           />
         </PopoverContent>
