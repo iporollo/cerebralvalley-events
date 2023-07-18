@@ -14,7 +14,7 @@ import {
 
 import { DatePickerWithRange } from "../DatePickerWithRange"
 
-export default async function FiltersRow() {
+export default function FiltersRow() {
   const setShowPastEvents = useStore((state: any) => state.setShowPastEvents)
 
   const handleTabChange = (type: EventState.UPCOMING | EventState.PAST) => {
@@ -59,11 +59,11 @@ export default async function FiltersRow() {
   }
 
   return (
-    <div className="mx-8 mb-4 flex flex-row gap-2 overflow-x-auto md:mx-2 md:hidden">
+    <div className="mb-4 flex flex-row gap-2 overflow-x-auto md:hidden">
       <DatePickerWithRange />
 
       <Select onValueChange={handleLocationTypeChange}>
-        <SelectTrigger className="min-w-max">
+        <SelectTrigger className="min-w-fit">
           <SelectValue
             defaultValue={LocationTypes.ALL}
             placeholder="All Locations"
@@ -78,7 +78,7 @@ export default async function FiltersRow() {
       </Select>
 
       <Select onValueChange={handleEventTypeChange}>
-        <SelectTrigger className="min-w-max">
+        <SelectTrigger className="min-w-fit">
           <SelectValue defaultValue={EventTypes.ALL} placeholder="All Events" />
         </SelectTrigger>
         <SelectContent>
@@ -89,7 +89,7 @@ export default async function FiltersRow() {
       </Select>
 
       <Select onValueChange={handleTabChange}>
-        <SelectTrigger className="min-w-max">
+        <SelectTrigger className="min-w-fit">
           <SelectValue
             defaultValue={EventState.UPCOMING}
             placeholder="Upcoming"
