@@ -7,7 +7,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FilterCard from "@/components/Filters/FiltersCard"
 
-export default async function FiltersColumn() {
+export default function FiltersColumn() {
   const setShowPastEvents = useStore((state: any) => state.setShowPastEvents)
 
   const handleTabChange = (type: EventState.UPCOMING | EventState.PAST) => {

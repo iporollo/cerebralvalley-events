@@ -93,7 +93,7 @@ const TimelineContainer = () => {
   }
 
   return (
-    <div className="mx-8 md:mr-2">
+    <>
       {isLoading ? (
         <div className="w-400 grow">
           <div className="ml-8 flex grow flex-col rounded-lg border-[1px] border-x-[#e3e3e3] border-b-[#d3d3d5] border-t-[#e7e7e9] bg-white px-5 py-3.5 text-[#717078] duration-200 hover:border-x-[#bbbbbd] hover:border-b-[#b2b3b5] hover:border-t-[#c3c3c5] hover:shadow-[0_0_8px_rgba(178,179,181,0.20)] dark:border-x-[#313035] dark:border-b-[#333237] dark:border-t-[rgba(64,63,68,1)] dark:bg-[#27262b] dark:hover:border-[#a1a1a3] dark:hover:bg-[#1b1a1f] dark:hover:text-[#a1a1a3] dark:hover:shadow-[0_0_8px_rgba(255,255,255,0.15)]">
@@ -110,7 +110,7 @@ const TimelineContainer = () => {
           <TimelineRow key={event.id} event={event} />
         ))
       )}
-    </div>
+    </>
   )
 }
 
