@@ -29,24 +29,44 @@ export default function FiltersCard() {
     (state: any) => state.setLocationTypeFilters
   )
 
-  const handleEventTypeChange = (
-    eventType: EventTypes.ALL | EventTypes.HACKATHON | EventTypes.CO_WORKING
-  ) => {
-    if (eventTypeFilters.includes(eventType)) {
-      setEventTypeFilters(eventTypeFilters.filter((e) => e !== eventType))
-    } else {
-      setEventTypeFilters([...eventTypeFilters, eventType])
+  const handleEventTypeChange = (eventType: EventTypes) => {
+    let modifiedEventTypeFilters = [...eventTypeFilters]
+
+    if (eventTypeFilters.includes(EventTypes.ALL)) {
+      modifiedEventTypeFilters = []
     }
+
+    if (eventType === EventTypes.ALL) {
+      modifiedEventTypeFilters = [EventTypes.ALL]
+    } else if (eventTypeFilters.includes(eventType)) {
+      modifiedEventTypeFilters = modifiedEventTypeFilters.filter(
+        (e) => e !== eventType
+      )
+    } else {
+      modifiedEventTypeFilters.push(eventType)
+    }
+
+    setEventTypeFilters(modifiedEventTypeFilters)
   }
 
   const handleLocationTypeChange = (locationType: LocationTypes) => {
-    if (locationTypeFilters.includes(locationType)) {
-      setLocationTypeFilters(
-        locationTypeFilters.filter((e) => e !== locationType)
+    let modifiedLocationTypeFilters = [...locationTypeFilters]
+
+    if (locationTypeFilters.includes(LocationTypes.ALL)) {
+      modifiedLocationTypeFilters = []
+    }
+
+    if (locationType === LocationTypes.ALL) {
+      modifiedLocationTypeFilters = [LocationTypes.ALL]
+    } else if (locationTypeFilters.includes(locationType)) {
+      modifiedLocationTypeFilters = modifiedLocationTypeFilters.filter(
+        (e) => e !== locationType
       )
     } else {
-      setLocationTypeFilters([...locationTypeFilters, locationType])
+      modifiedLocationTypeFilters.push(locationType)
     }
+
+    setLocationTypeFilters(modifiedLocationTypeFilters)
   }
 
   return (
