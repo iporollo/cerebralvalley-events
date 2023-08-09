@@ -120,6 +120,14 @@ export default function FiltersRow() {
             New York City
           </DropdownMenuCheckboxItem>
           <DropdownMenuCheckboxItem
+            checked={locationTypeFilters.includes(LocationTypes.LONDON)}
+            onCheckedChange={() =>
+              handleLocationTypeChange(LocationTypes.LONDON)
+            }
+          >
+            London
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem
             checked={locationTypeFilters.includes(LocationTypes.REMOTE)}
             onCheckedChange={() =>
               handleLocationTypeChange(LocationTypes.REMOTE)

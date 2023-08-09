@@ -43,6 +43,7 @@ enum LocationTypes {
   ALL = "ALL_LOCATIONS",
   SF = "San Francisco, CA",
   NYC = "New York, NY",
+  LONDON = "London, UK",
   REMOTE = "Remote",
 }
 

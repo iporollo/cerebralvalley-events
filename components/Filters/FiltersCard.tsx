@@ -157,6 +157,21 @@ export default function FiltersCard() {
         </div>
         <div className="my-2 flex items-center space-x-2">
           <Checkbox
+            id={LocationTypes.LONDON}
+            checked={locationTypeFilters.includes(LocationTypes.LONDON)}
+            onCheckedChange={() =>
+              handleLocationTypeChange(LocationTypes.LONDON)
+            }
+          />
+          <label
+            htmlFor={LocationTypes.LONDON}
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            London
+          </label>
+        </div>
+        <div className="my-2 flex items-center space-x-2">
+          <Checkbox
             id={LocationTypes.REMOTE}
             checked={locationTypeFilters.includes(LocationTypes.REMOTE)}
             onCheckedChange={() =>
