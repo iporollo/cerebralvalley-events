@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import useStore from "@/src/store"
+import { useFilterStore } from "@/src/store"
 import { EventTypes, LocationTypes } from "@/src/utils/constants"
 
 import {
@@ -16,16 +16,16 @@ import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 export default function FiltersCard() {
-  const eventTypeFilters: string[] = useStore(
+  const eventTypeFilters: string[] = useFilterStore(
     (state: any) => state.eventTypeFilters
   )
-  const setEventTypeFilters = useStore(
+  const setEventTypeFilters = useFilterStore(
     (state: any) => state.setEventTypeFilters
   )
-  const locationTypeFilters: string[] = useStore(
+  const locationTypeFilters: string[] = useFilterStore(
     (state: any) => state.locationTypeFilters
   )
-  const setLocationTypeFilters = useStore(
+  const setLocationTypeFilters = useFilterStore(
     (state: any) => state.setLocationTypeFilters
   )
 

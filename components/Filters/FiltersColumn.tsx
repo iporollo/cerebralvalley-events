@@ -1,6 +1,6 @@
 "use client"
 
-import useStore from "@/src/store"
+import { useFilterStore } from "@/src/store"
 import { EventState } from "@/src/utils/constants"
 
 import { Calendar } from "@/components/ui/calendar"
@@ -8,7 +8,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FilterCard from "@/components/Filters/FiltersCard"
 
 export default function FiltersColumn() {
-  const setShowPastEvents = useStore((state: any) => state.setShowPastEvents)
+  const setShowPastEvents = useFilterStore(
+    (state: any) => state.setShowPastEvents
+  )
 
   const handleTabChange = (type: EventState.UPCOMING | EventState.PAST) => {
     if (type === EventState.PAST) {

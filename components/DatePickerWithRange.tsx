@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import useStore from "@/src/store"
+import { useFilterStore } from "@/src/store"
 import { addDays, format } from "date-fns"
 import { Calendar as CalendarIcon, ChevronDown } from "lucide-react"
 
@@ -20,8 +20,8 @@ export function DatePickerWithRange({
   const today = new Date()
   const weekFromToday = addDays(today, 7)
 
-  const dateFilter = useStore((state: any) => state.dateFilter)
-  const setDateFilter = useStore((state: any) => state.setDateFilter)
+  const dateFilter = useFilterStore((state: any) => state.dateFilter)
+  const setDateFilter = useFilterStore((state: any) => state.setDateFilter)
 
   return (
     <div className={cn("grid gap-2", className)}>

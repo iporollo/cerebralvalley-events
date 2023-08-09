@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import useStore from "@/src/store"
+import { useFilterStore } from "@/src/store"
 import { DateRange } from "react-day-picker"
 import EventService from "src/services/events"
 import {
@@ -17,10 +17,12 @@ import { Skeleton } from "@/components/ui/skeleton"
 import TimelineRow from "./TimelineRow"
 
 const TimelineContainer = () => {
-  const showPastEvents = useStore((state: any) => state.showPastEvents)
-  const dateFilter = useStore((state: any) => state.dateFilter)
-  const eventTypeFilters = useStore((state: any) => state.eventTypeFilters)
-  const locationTypeFilters = useStore(
+  const showPastEvents = useFilterStore((state: any) => state.showPastEvents)
+  const dateFilter = useFilterStore((state: any) => state.dateFilter)
+  const eventTypeFilters = useFilterStore(
+    (state: any) => state.eventTypeFilters
+  )
+  const locationTypeFilters = useFilterStore(
     (state: any) => state.locationTypeFilters
   )
 

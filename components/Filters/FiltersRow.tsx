@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import useStore from "@/src/store"
+import { useFilterStore } from "@/src/store"
 import { EventState, EventTypes, LocationTypes } from "@/src/utils/constants"
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 import { ChevronDown } from "lucide-react"
@@ -26,7 +26,9 @@ import { DatePickerWithRange } from "../DatePickerWithRange"
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 export default function FiltersRow() {
-  const setShowPastEvents = useStore((state: any) => state.setShowPastEvents)
+  const setShowPastEvents = useFilterStore(
+    (state: any) => state.setShowPastEvents
+  )
 
   const handleTabChange = (type: EventState.UPCOMING | EventState.PAST) => {
     if (type === EventState.PAST) {
@@ -36,16 +38,16 @@ export default function FiltersRow() {
     }
   }
 
-  const eventTypeFilters: string[] = useStore(
+  const eventTypeFilters: string[] = useFilterStore(
     (state: any) => state.eventTypeFilters
   )
-  const setEventTypeFilters = useStore(
+  const setEventTypeFilters = useFilterStore(
     (state: any) => state.setEventTypeFilters
   )
-  const locationTypeFilters: string[] = useStore(
+  const locationTypeFilters: string[] = useFilterStore(
     (state: any) => state.locationTypeFilters
   )
-  const setLocationTypeFilters = useStore(
+  const setLocationTypeFilters = useFilterStore(
     (state: any) => state.setLocationTypeFilters
   )
 
