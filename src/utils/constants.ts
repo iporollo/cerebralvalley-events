@@ -1,6 +1,10 @@
 const AIRTABLE_EVENTS_BASE = "appNOa0dRcLXhHft1"
 const AIRTABLE_SPONSORS_BASE = "appO1X4PqFvkUyaLy"
 
+const PUSHER_EVENT_CHANNEL: string = "presence-cv-events"
+
+const AVATAR_SIZE = "2.5rem"
+
 enum AirtableTables {
   EVENTS_TABLE = "tblY9mWxFMnTp7IzP",
   SPONSORS_TABLE = "tblu5cjfP51GBgabk",
@@ -50,6 +54,8 @@ enum LocationTypes {
 export {
   AIRTABLE_EVENTS_BASE,
   AIRTABLE_SPONSORS_BASE,
+  PUSHER_EVENT_CHANNEL,
+  AVATAR_SIZE,
   AirtableTables,
   AirtableTableEventViews,
   AirtableTableEventColumns,
