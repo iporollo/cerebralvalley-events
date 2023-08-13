@@ -4,5 +4,6 @@ type PageViewer = {
     twitterAvatar: string
     twitterHandle: string
     followerCount: number
+    airtableRecordId: string
   }
 }

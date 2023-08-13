@@ -1,52 +1,56 @@
-import Link from "next/link"
+"use client"
+
+import dynamic from "next/dynamic"
+import { usePageViewers } from "@/src/hooks/usePageViewers"
 
 import { siteConfig } from "@/config/site"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/icons"
 import { MainNav } from "@/components/main-nav"
-import { ThemeToggle } from "@/components/theme-toggle"
+
+import { NavAuth } from "./NavAuth"
+
+const StackedAvatarList = dynamic(
+  () => import("@/components/StackedAvatarList/StackedAvatarList"),
+  { ssr: false }
+)
 
 export function SiteHeader() {
+  const { pageViewers } = usePageViewers()
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-white dark:border-b-[#28272c] dark:bg-[#18171c]">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <MainNav items={siteConfig.mainNav} />
-        <div className="flex flex-1 items-center justify-end space-x-4">
-          <nav className="flex items-center space-x-1">
-            <Link
-              href={siteConfig.links.slack}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={buttonVariants({
-                  size: "sm",
-                  variant: "ghost",
-                  className: "text-slate-700 dark:text-slate-400",
-                })}
-              >
-                <Icons.slack className="h-5 w-5 fill-current" />
-                <span className="sr-only">Slack</span>
-              </div>
-            </Link>
-            <Link
-              href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={buttonVariants({
-                  size: "sm",
-                  variant: "ghost",
-                  className: "text-slate-700 dark:text-slate-400",
-                })}
-              >
-                <Icons.twitter className="h-5 w-5 fill-current" />
-                <span className="sr-only">Twitter</span>
-              </div>
-            </Link>
-            <ThemeToggle />
-          </nav>
+        <div className="flex">
+          <div className="hidden px-2 sm:px-8 md:block">
+            <StackedAvatarList
+              people={
+                pageViewers
+                  ?.map((v, idx) => {
+                    return {
+                      airtableId: v.info.airtableRecordId || v.id,
+                      avatar: v.info.twitterAvatar || "",
+                      handle: v.info.twitterHandle || v.id,
+                      followerCount: v.info.followerCount || 0,
+                    }
+                  })
+                  .sort((a, b) => {
+                    if (
+                      a.handle.includes("anonymousdegen") &&
+                      !b.handle.includes("anonymousdegen")
+                    ) {
+                      return 1 // a should be placed after b
+                    } else if (
+                      !a.handle.includes("anonymousdegen") &&
+                      b.handle.includes("anonymousdegen")
+                    ) {
+                      return -1 // a should be placed before b
+                    }
+                    return 0 // no specific order between a and b
+                  }) || []
+              }
+            />
+          </div>
+          <NavAuth />
         </div>
       </div>
     </header>

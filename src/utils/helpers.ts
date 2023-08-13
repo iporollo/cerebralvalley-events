@@ -28,4 +28,10 @@ const processDate = (startDate: string, endDate: string) => {
   }
 }
 
-export { processDate }
+const hashCode = (s: any) =>
+  s.split("").reduce((a: any, b: any) => {
+    a = (a << 5) - a + b.charCodeAt(0)
+    return a & a
+  }, 0)
+
+export { processDate, hashCode }

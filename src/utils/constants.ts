@@ -3,17 +3,19 @@ const AIRTABLE_SPONSORS_BASE = "appO1X4PqFvkUyaLy"
 
 const PUSHER_EVENT_CHANNEL: string = "presence-cv-events"
 
-const AVATAR_SIZE = "2.5rem"
-
 enum AirtableTables {
   EVENTS_TABLE = "tblY9mWxFMnTp7IzP",
-  SPONSORS_TABLE = "tblu5cjfP51GBgabk",
+  USERS_TABLE = "tblWaB36hntfjxqcR",
 }
 
 enum AirtableTableEventViews {
   ALL_EVENTS = "viwGjHO5VHWJMFaRn",
   UPCOMING_EVENTS = "viwKfbSNjj5KeKtpD",
   PAST_EVENTS = "viwzNbCT5E20LpmH5",
+}
+
+enum AirtableTableUserViews {
+  ALL_DATA = "viwEmS7RLq50IuYBa",
 }
 
 enum AirtableTableEventColumns {
@@ -25,11 +27,18 @@ enum AirtableTableEventColumns {
   TAGS = "Tags",
 }
 
-enum AirtableTableSponsorColumns {
+enum AirtableTableUserColumns {
+  HANDLE = "Handle",
   NAME = "Name",
-  EMAIL = "Email",
-  SOCIAL = "Social",
-  MESSAGE = "Message",
+  AVATAR = "Avatar",
+  // EVENTS_GOING = "Events - Going",
+  EVENTS_INTERESTED = "Events - Interested",
+  CACHED_FOLLOWER_COUNT = "Cached follower count",
+  // CACHED_FOLLOWED = "Cached followed",
+  // CACHED_FOLLOWED_HANDLES = "Handle (from Cached followed)",
+  ADMIN = "Admin",
+  LAST_LOG_IN = "Last Log In",
+  RECORD_ID = "record_id",
 }
 
 enum EventState {
@@ -55,11 +64,11 @@ export {
   AIRTABLE_EVENTS_BASE,
   AIRTABLE_SPONSORS_BASE,
   PUSHER_EVENT_CHANNEL,
-  AVATAR_SIZE,
   AirtableTables,
   AirtableTableEventViews,
+  AirtableTableUserViews,
   AirtableTableEventColumns,
-  AirtableTableSponsorColumns,
+  AirtableTableUserColumns,
   EventState,
   EventTypes,
   LocationTypes,

@@ -3,14 +3,13 @@
 import React, { useEffect, useState } from "react"
 import { useFilterStore } from "@/src/store"
 import { DateRange } from "react-day-picker"
-import EventService from "src/services/events"
+import AirtableService from "src/services/airtable"
 import {
   AirtableTableEventColumns,
   EventTypes,
   LocationTypes,
 } from "src/utils/constants"
 
-import type { EventType } from "@/types/event"
 import { Card, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -35,7 +34,7 @@ const TimelineContainer = () => {
   const fetchData = async (dateRangeFilter?: DateRange) => {
     setIsLoading(true)
 
-    const response = await EventService.fetchEvents(
+    const response = await AirtableService.fetchEvents(
       showPastEvents,
       dateRangeFilter
     )

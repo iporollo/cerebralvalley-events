@@ -11,6 +11,8 @@ import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
+import { NextAuthProvider } from "./providers"
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -70,19 +72,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <PostHogProvider>
-        <body
-          className={cn("antialised min-h-screen font-sans", fontSans.variable)}
-        >
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1 bg-white dark:bg-[#18171c]">
-                {children}
+        <NextAuthProvider>
+          <body
+            className={cn(
+              "antialised min-h-screen font-sans",
+              fontSans.variable
+            )}
+          >
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1 bg-white dark:bg-[#18171c]">
+                  {children}
+                </div>
               </div>
-            </div>
-            <TailwindIndicator />
-          </ThemeProvider>
-        </body>
+              <TailwindIndicator />
+            </ThemeProvider>
+          </body>
+        </NextAuthProvider>
       </PostHogProvider>
     </html>
   )
