@@ -24,7 +24,12 @@ export default function StackedAvatarList({
               key={`${person.avatar || person.handle}${eventId}`}
               className={"inline-block h-8 w-8 rounded-full"}
               imgSrc={person.avatar}
-              handle={person.handle}
+              handle={
+                person.handle?.includes("anonymous")
+                  ? "Anon"
+                  : person.handle || ""
+              }
+              showTooltip
             />
           ))}
       </div>
@@ -43,6 +48,7 @@ export default function StackedAvatarList({
             className={"inline-block h-8 w-8 rounded-full"}
             imgSrc={p.avatar}
             handle={p.handle}
+            showTooltip
           />
         ))}
         <div
