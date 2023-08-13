@@ -10,7 +10,7 @@ import TimelineContainer from "@/components/Timeline/TimelineContainer"
 export default function EventsColumn() {
   const showPastEvents = useFilterStore((state: any) => state.showPastEvents)
   return (
-    <div className="mx-6">
+    <div className="mx-6 md:w-full">
       <FiltersRow />
       <div className="flex flex-col">
         <div className="flex flex-row justify-between pb-4">
