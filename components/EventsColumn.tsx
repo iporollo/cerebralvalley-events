@@ -13,11 +13,13 @@ export default function EventsColumn() {
     <div className="mx-6">
       <FiltersRow />
       <div className="flex flex-col">
-        <div className="flex flex-row justify-between">
-          <div className="text-lg font-bold">
+        <div className="flex flex-row justify-between pb-4">
+          <div className="text-2xl ">
             {showPastEvents ? "Past Events" : "Upcoming Events"}
           </div>
-          <SubmitEvent />
+          <div className="md:hidden">
+            <SubmitEvent />
+          </div>
         </div>
         <TimelineContainer />
       </div>

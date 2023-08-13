@@ -6,6 +6,7 @@ import { EventState } from "@/src/utils/constants"
 import { Calendar } from "@/components/ui/calendar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FilterCard from "@/components/Filters/FiltersCard"
+import SubmitEvent from "@/components/SubmitEvent"
 
 export default function FiltersColumn() {
   const setShowPastEvents = useFilterStore(
@@ -21,7 +22,7 @@ export default function FiltersColumn() {
   }
   return (
     <div className="mx-8 hidden flex-col md:mx-2 md:flex">
-      {/* <Search /> */}
+      <SubmitEvent variant="outline" />
       <Calendar />
       <Tabs defaultValue={EventState.UPCOMING}>
         <TabsList className="grid w-full grid-cols-2 border-[#e3e3e3] bg-gray-200 dark:border-[#313035] dark:bg-[#27262b]">
