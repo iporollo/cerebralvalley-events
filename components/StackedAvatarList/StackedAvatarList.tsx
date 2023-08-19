@@ -5,11 +5,13 @@ import Avatar from "components/Avatar/Avatar"
 interface StackedAvatarListProps {
   people: SimpleTwitterUser[]
   eventId?: string
+  iconSize?: number
 }
 
 export default function StackedAvatarList({
   people,
   eventId,
+  iconSize = 8,
 }: StackedAvatarListProps) {
   const numAvatars = 4
   if (!people || people.length === 0) {
@@ -41,23 +43,23 @@ export default function StackedAvatarList({
     const remainingImages = sortedPeople.length - numAvatars
     const firstThree = sortedPeople.slice(0, numAvatars)
     return (
-      <div className="flex -space-x-2 overflow-hidden">
+      <div className="flex items-center -space-x-2 overflow-hidden">
         {firstThree.map((p) => (
           <Avatar
             key={`${p.avatar || p.handle}${eventId}`}
-            className={"inline-block h-8 w-8 rounded-full"}
+            className={`inline-block h-${iconSize} w-${iconSize} rounded-full`}
             imgSrc={p.avatar}
             handle={p.handle}
             showTooltip
           />
         ))}
         <div
-          className={"flex h-8 w-8 items-center justify-center rounded-full"}
+          className={`flex h-${iconSize} w-${iconSize} items-center justify-center rounded-full`}
           style={{
             backgroundColor: "#D9D9D9",
           }}
         >
-          <span>{`+${remainingImages}`}</span>
+          <span className="text-xs">{`+${remainingImages}`}</span>
         </div>
       </div>
     )

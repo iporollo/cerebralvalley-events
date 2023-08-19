@@ -1,21 +1,144 @@
 import * as React from "react"
+import dynamic from "next/dynamic"
+import { CalendarPlus, PlusCircle } from "lucide-react"
 
-import type { EventType } from "@/types/event"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+const StackedAvatarList = dynamic(
+  () => import("@/components/StackedAvatarList/StackedAvatarList"),
+  { ssr: false }
+)
+
+const AddToCalendar = () => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant={"outline"}
+          className="flex h-fit border-[#e3e3e3] bg-gray-200 text-xs dark:border-[#313035] dark:bg-black"
+        >
+          <CalendarPlus className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" forceMount>
+        <DropdownMenuItem
+          style={{ cursor: "pointer" }}
+          onClick={() => console.log("google calendar")}
+        >
+          Google Calendar
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          style={{ cursor: "pointer" }}
+          onClick={() => console.log("outlook calendar")}
+        >
+          Outlook Calendar
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          style={{ cursor: "pointer" }}
+          onClick={() => console.log("apple calendar")}
+        >
+          Apple Calendar
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+const UsersInterested = () => {
+  return (
+    <div className="flex items-center">
+      <StackedAvatarList
+        iconSize={6}
+        people={[
+          {
+            avatar: "",
+            handle: "test1",
+            followerCount: 1000,
+            name: "",
+            airtableId: "",
+          },
+          {
+            avatar: "",
+            handle: "test2",
+            followerCount: 2000,
+            name: "",
+            airtableId: "",
+          },
+          {
+            avatar: "",
+            handle: "test3",
+            followerCount: 3000,
+            name: "",
+            airtableId: "",
+          },
+          {
+            avatar: "",
+            handle: "test4",
+            followerCount: 4000,
+            name: "",
+            airtableId: "",
+          },
+          {
+            avatar: "",
+            handle: "test5",
+            followerCount: 5000,
+            name: "",
+            airtableId: "",
+          },
+          {
+            avatar: "",
+            handle: "test6",
+            followerCount: 6000,
+            name: "",
+            airtableId: "",
+          },
+        ]}
+      />
+      <Button
+        variant={"ghost"}
+        className="ml-1 mr-2 flex h-fit bg-none p-0 text-xs"
+        onClick={() => {
+          console.log("interested")
+        }}
+      >
+        <PlusCircle className="h-4 w-4" />
+      </Button>
+    </div>
+  )
+}
+
+const EventActions = () => {
+  return (
+    <div className="flex">
+      <UsersInterested />
+      <AddToCalendar />
+    </div>
+  )
+}
 
 export default function UpcomingEventCard({ event }: { event: EventType }) {
   return (
     <div className="w-400 grow">
-      <div className="ml-8 flex grow flex-col rounded-lg border-[1px] border-x-[#e3e3e3] border-b-[#d3d3d5] border-t-[#e7e7e9] bg-white px-5 py-3.5 text-[#717078] duration-200 hover:border-x-[#bbbbbd] hover:border-b-[#b2b3b5] hover:border-t-[#c3c3c5] hover:shadow-[0_0_8px_rgba(178,179,181,0.20)] dark:border-x-[#313035] dark:border-b-[#333237] dark:border-t-[rgba(64,63,68,1)] dark:bg-[#27262b] dark:hover:border-[#a1a1a3] dark:hover:bg-[#1b1a1f] dark:hover:text-[#a1a1a3] dark:hover:shadow-[0_0_8px_rgba(255,255,255,0.15)]">
+      <div className="ml-8 flex grow flex-col rounded-lg border-[1px] border-x-[#e3e3e3] border-b-[#d3d3d5] border-t-[#e7e7e9] bg-white px-5 py-3.5 text-[#717078] duration-200 dark:border-x-[#313035] dark:border-b-[#333237] dark:border-t-[rgba(64,63,68,1)] dark:bg-[#27262b] ">
+        <p>
+          {new Date(event.startDate).toLocaleString("en-US", {
+            hour12: true,
+            hour: "numeric",
+            minute: "numeric",
+          })}
+        </p>
         <a href={event.link} target="_blank" rel="noreferrer">
-          <p>
-            {new Date(event.startDate).toLocaleString("en-US", {
-              hour12: true,
-              hour: "numeric",
-              minute: "numeric",
-            })}
-          </p>
-          <h3 className="my-1 text-lg font-medium text-gray-900 dark:font-normal dark:text-white">
+          <h3 className="my-1 text-lg font-medium text-gray-900 hover:underline dark:font-normal dark:text-white">
             {event.event}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,6 +156,8 @@ export default function UpcomingEventCard({ event }: { event: EventType }) {
               <polyline points="7 7 17 7 17 17"></polyline>
             </svg>
           </h3>
+        </a>
+        <div className="flex items-center justify-between">
           <p className="text-base font-normal text-[#6f737c]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -51,12 +176,16 @@ export default function UpcomingEventCard({ event }: { event: EventType }) {
             </svg>
             {event.location}
           </p>
-          {event.tags && event.tags.length > 0 && (
+          {!event.tags || (event.tags.length === 0 && <EventActions />)}
+        </div>
+        {event.tags && event.tags.length > 0 && (
+          <div className="flex items-center justify-between">
             <div className="mb-1 mt-2">
               <Badge>{event.tags}</Badge>
             </div>
-          )}
-        </a>
+            <EventActions />
+          </div>
+        )}
       </div>
     </div>
   )
