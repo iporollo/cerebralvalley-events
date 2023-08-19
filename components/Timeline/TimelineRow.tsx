@@ -1,5 +1,3 @@
-import type { EventType } from "@/types/event"
-
 import DateComponent from "./DateComponent"
 import UpcomingEventCard from "./UpcomingEventCard"
 

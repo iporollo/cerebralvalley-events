@@ -38,7 +38,7 @@ const Avatar = ({
     return (
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger className="flex">
             <BaseAvatar className={className}>
               <AvatarImage src={avatarImage} alt={handle} />
               <AvatarFallback>CV</AvatarFallback>

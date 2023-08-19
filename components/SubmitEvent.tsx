@@ -8,8 +8,9 @@ export default function SubmitEvent({ variant = "default" }) {
   return (
     <div className="flex">
       <Button
+        // @ts-ignore
         variant={variant}
-        className="flex h-fit w-full  text-xs"
+        className="flex h-fit w-full border-[#e3e3e3] bg-gray-200 text-xs text-xs dark:border-[#313035] dark:bg-black"
         onClick={() =>
           window.open(
             "https://airtable.com/appNOa0dRcLXhHft1/shrhGUZFG8n4YAaU1",
