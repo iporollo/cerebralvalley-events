@@ -1,21 +1,14 @@
-import * as React from "react"
+import { useEffect } from "react"
 import dynamic from "next/dynamic"
+import AirtableService from "@/src/services/airtable"
+import { AirtableTableUserColumns } from "@/src/utils/constants"
 import { mapCalEvent } from "@/src/utils/mappers/calEventMapper"
 import { buildShareUrl } from "@/src/utils/saveToCalendar"
 import { CalendarPlus, PlusCircle } from "lucide-react"
+import { signIn, useSession } from "next-auth/react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 
 const StackedAvatarList = dynamic(
   () => import("@/components/StackedAvatarList/StackedAvatarList"),
@@ -82,7 +75,30 @@ const AddToCalendar = ({ event }: { event: EventType }) => {
   //   </DropdownMenu>
   // )
 }
-const UsersInterested = () => {
+const UsersInterested = ({ event }: { event: EventType }) => {
+  const { data: session, status: sessionStatus } = useSession()
+  const currentUserAirtableId = session?.user?.airtableRecordId
+
+  const submitInterest = async () => {
+    if (currentUserAirtableId) {
+      const airtableUserRecord = await AirtableService.findUserById(
+        currentUserAirtableId
+      )
+
+      var userEvents =
+        airtableUserRecord.get(AirtableTableUserColumns.EVENTS_INTERESTED) || []
+
+      const records = await AirtableService.setUserInterestedEvents(
+        currentUserAirtableId,
+        [...userEvents, event.id]
+      )
+
+      if (records.length === 0) {
+        console.error("Couldn't update user record with interested events")
+      }
+    }
+  }
+
   return (
     <div className="flex items-center">
       <StackedAvatarList
@@ -135,9 +151,7 @@ const UsersInterested = () => {
       <Button
         variant={"ghost"}
         className="ml-1 mr-2 flex h-fit bg-none p-0 text-xs"
-        onClick={() => {
-          console.log("interested")
-        }}
+        onClick={() => submitInterest()}
       >
         <PlusCircle className="h-4 w-4" />
       </Button>
@@ -148,7 +162,7 @@ const UsersInterested = () => {
 const EventActions = ({ event }: { event: EventType }) => {
   return (
     <div className="flex">
-      <UsersInterested />
+      <UsersInterested event={event} />
       <AddToCalendar event={event} />
     </div>
   )

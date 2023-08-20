@@ -25,17 +25,17 @@ enum AirtableTableEventColumns {
   LOCATION = "Location",
   LINK = "Link",
   TAGS = "Tags",
+  IDS_INTERESTED = "Users - Interested",
+  // USERS_INTERESTED = "Users Interested - Aggregate",
+  // AVATARS_INTERESTED = "Avatars Interested - Aggregate",
 }
 
 enum AirtableTableUserColumns {
   HANDLE = "Handle",
   NAME = "Name",
   AVATAR = "Avatar",
-  // EVENTS_GOING = "Events - Going",
   EVENTS_INTERESTED = "Events - Interested",
   CACHED_FOLLOWER_COUNT = "Cached follower count",
-  // CACHED_FOLLOWED = "Cached followed",
-  // CACHED_FOLLOWED_HANDLES = "Handle (from Cached followed)",
   ADMIN = "Admin",
   LAST_LOG_IN = "Last Log In",
   RECORD_ID = "record_id",
