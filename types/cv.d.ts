@@ -15,3 +15,14 @@ type EventType = {
   link: string
   tags?: string[]
 }
+
+type AddToCalEvent = {
+  description: string
+  ctz?: string
+  duration: string
+  endDatetime: string
+  location: string
+  startDatetime: string
+  timezone: string
+  title: string
+}

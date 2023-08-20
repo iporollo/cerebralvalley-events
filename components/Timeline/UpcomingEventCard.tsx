@@ -1,5 +1,7 @@
 import * as React from "react"
 import dynamic from "next/dynamic"
+import { mapCalEvent } from "@/src/utils/mappers/calEventMapper"
+import { buildShareUrl } from "@/src/utils/saveToCalendar"
 import { CalendarPlus, PlusCircle } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
@@ -20,39 +22,65 @@ const StackedAvatarList = dynamic(
   { ssr: false }
 )
 
-const AddToCalendar = () => {
+const AddToCalendar = ({ event }: { event: EventType }) => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant={"outline"}
-          className="flex h-fit border-[#e3e3e3] bg-gray-200 text-xs dark:border-[#313035] dark:bg-black"
-        >
-          <CalendarPlus className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" forceMount>
-        <DropdownMenuItem
-          style={{ cursor: "pointer" }}
-          onClick={() => console.log("google calendar")}
-        >
-          Google Calendar
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          style={{ cursor: "pointer" }}
-          onClick={() => console.log("outlook calendar")}
-        >
-          Outlook Calendar
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          style={{ cursor: "pointer" }}
-          onClick={() => console.log("apple calendar")}
-        >
-          Apple Calendar
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button
+      variant={"outline"}
+      className="flex h-fit border-[#e3e3e3] bg-gray-200 text-xs dark:border-[#313035] dark:bg-black"
+      onClick={() => {
+        const mappedCalEvent: AddToCalEvent = mapCalEvent(event)
+        const url = buildShareUrl(mappedCalEvent, "GOOGLE")
+        window.open(url, "_blank")
+      }}
+    >
+      <CalendarPlus className="h-4 w-4" />
+    </Button>
   )
+  // TODO: For future enhancement
+  // return (
+  //   <DropdownMenu>
+  //     <DropdownMenuTrigger asChild>
+  //       <Button
+  //         variant={"outline"}
+  //         className="flex h-fit border-[#e3e3e3] bg-gray-200 text-xs dark:border-[#313035] dark:bg-black"
+  //       >
+  //         <CalendarPlus className="h-4 w-4" />
+  //       </Button>
+  //     </DropdownMenuTrigger>
+  //     <DropdownMenuContent align="end" forceMount>
+  //       <DropdownMenuItem
+  //         style={{ cursor: "pointer" }}
+  // onClick={() => {
+  //   const mappedCalEvent: AddToCalEvent = mapCalEvent(event)
+  //   const url = buildShareUrl(mappedCalEvent, "GOOGLE")
+  //   window.open(url, "_blank")
+  // }}
+  //       >
+  //         Google Calendar
+  //       </DropdownMenuItem>
+  //       <DropdownMenuItem
+  //         style={{ cursor: "pointer" }}
+  //         onClick={() => {
+  //           const mappedCalEvent: AddToCalEvent = mapCalEvent(event)
+  //           const url = buildShareUrl(mappedCalEvent, "OUTLOOK")
+  //           window.open(url, "_blank")
+  //         }}
+  //       >
+  //         Outlook Calendar
+  //       </DropdownMenuItem>
+  //       <DropdownMenuItem
+  //         style={{ cursor: "pointer" }}
+  //         onClick={() => {
+  //           const mappedCalEvent: AddToCalEvent = mapCalEvent(event)
+  //           const url = buildShareUrl(mappedCalEvent, "ICAL")
+  //           window.open(url, "_blank")
+  //         }}
+  //       >
+  //         Apple Calendar
+  //       </DropdownMenuItem>
+  //     </DropdownMenuContent>
+  //   </DropdownMenu>
+  // )
 }
 const UsersInterested = () => {
   return (
@@ -117,11 +145,11 @@ const UsersInterested = () => {
   )
 }
 
-const EventActions = () => {
+const EventActions = ({ event }: { event: EventType }) => {
   return (
     <div className="flex">
       <UsersInterested />
-      <AddToCalendar />
+      <AddToCalendar event={event} />
     </div>
   )
 }
@@ -176,14 +204,15 @@ export default function UpcomingEventCard({ event }: { event: EventType }) {
             </svg>
             {event.location}
           </p>
-          {!event.tags || (event.tags.length === 0 && <EventActions />)}
+          {!event.tags ||
+            (event.tags.length === 0 && <EventActions event={event} />)}
         </div>
         {event.tags && event.tags.length > 0 && (
           <div className="flex items-center justify-between">
             <div className="mb-1 mt-2">
               <Badge>{event.tags}</Badge>
             </div>
-            <EventActions />
+            <EventActions event={event} />
           </div>
         )}
       </div>
