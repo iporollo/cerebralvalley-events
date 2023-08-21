@@ -13,7 +13,12 @@ interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "Cerebral Valley Events",
   description: "Tracking the latest AI events happening around the world.",
-  mainNav: [],
+  mainNav: [
+    {
+      title: "Google Sheet",
+      href: "https://docs.google.com/spreadsheets/d/1P6ut7vL-gXKbeDeh3nuPqBjoCupjIt87Sw7TnhumBSU/edit#gid=1781893986",
+    },
+  ],
   links: {
     slack:
       "https://join.slack.com/t/cerebral-valley/shared_invite/zt-1x3ajihhs-XVyLxWO84uY7CCnShfI1cw",
