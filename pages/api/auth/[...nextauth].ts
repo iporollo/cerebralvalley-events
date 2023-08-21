@@ -111,8 +111,6 @@ export const authOptions: NextAuthOptions = {
             input.screen_name === undefined &&
             input.followers_count === undefined
 
-          console.log("twitterProfile:")
-          console.log(twitterProfile)
           // Payload structure for Oauth 1.0
           if (!isTwitterProfile(twitterProfile)) {
             followersCount = twitterProfile.followers_count
@@ -133,11 +131,8 @@ export const authOptions: NextAuthOptions = {
             twitterProfileImage,
             displayName: "",
           }
-          console.log(User)
 
           record = await AirtableService.findOrCreateUser(User)
-          console.log("record:")
-          console.log(record)
 
           token["userProfile"] = {
             followersCount,
@@ -146,8 +141,6 @@ export const authOptions: NextAuthOptions = {
             airtableRecordId: record ? record.id : "",
             image: twitterProfileImage,
           }
-          console.log("userProfile:")
-          console.log(token["userProfile"])
         }
 
         if (account) {
