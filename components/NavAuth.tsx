@@ -23,11 +23,13 @@ export function NavAuth() {
         ) : (
           <Button
             className="flex h-fit w-fit justify-end px-4 text-xs"
-            onClick={() =>
-              signIn("twitter", {
-                callback: window.location.href,
-              })
-            }
+            onClick={() => {
+              console.log(window.location.href)
+
+              // signIn("twitter", {
+              //   callback: window.location.href,
+              // })
+            }}
           >
             Log In
           </Button>
