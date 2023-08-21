@@ -7,5 +7,7 @@ type Props = {
 }
 
 export const NextAuthProvider = ({ children }: Props) => {
-  return <SessionProvider>{children}</SessionProvider>
+  return (
+    <SessionProvider basePath="/events/api/auth">{children}</SessionProvider>
+  )
 }
