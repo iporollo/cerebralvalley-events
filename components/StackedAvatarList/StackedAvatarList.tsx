@@ -24,7 +24,7 @@ export default function StackedAvatarList({
           .map((person) => (
             <Avatar
               key={`${person.avatar || person.handle}${eventId}`}
-              className={"inline-block h-8 w-8 rounded-full"}
+              className={`inline-block h-${iconSize} w-${iconSize} rounded-full`}
               imgSrc={person.avatar}
               handle={
                 person.handle?.includes("anonymous")

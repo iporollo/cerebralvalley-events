@@ -28,6 +28,7 @@ enum AirtableTableEventColumns {
   USERS_INTERESTED = "Users - Interested",
   HANDLES_INTERESTED = "User Interested Handles",
   AVATARS_INTERESTED = "User Interested Avatars",
+  IDS_INTERESTED = "User Interested Ids",
 }
 
 enum AirtableTableUserColumns {

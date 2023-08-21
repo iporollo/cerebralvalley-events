@@ -14,6 +14,7 @@ type EventType = {
   location: string
   link: string
   tags?: string[]
+  usersInterested?: SimpleTwitterUser[]
 }
 
 type AddToCalEvent = {

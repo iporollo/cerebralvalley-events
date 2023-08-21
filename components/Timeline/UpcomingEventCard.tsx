@@ -77,7 +77,7 @@ const AddToCalendar = ({ event }: { event: EventType }) => {
 }
 const UsersInterested = ({ event }: { event: EventType }) => {
   const [usersInterested, setUsersInterested] = useState<SimpleTwitterUser[]>(
-    []
+    event.usersInterested || []
   )
   const { data: session, status: sessionStatus } = useSession()
   const currentUserAirtableId = session?.user?.airtableRecordId

@@ -38,6 +38,7 @@ const TimelineContainer = () => {
       showPastEvents,
       dateRangeFilter
     )
+
     const mappedEvents = eventObjMapper(response)
 
     setEvents(mappedEvents)
@@ -58,6 +59,19 @@ const TimelineContainer = () => {
     const mappedEvents: EventType[] = []
 
     events.forEach(async (event) => {
+      const usersInterested: SimpleTwitterUser[] = event
+        .get(AirtableTableEventColumns.HANDLES_INTERESTED)
+        .map((handle: string, index: number) => {
+          return {
+            handle: handle,
+            airtableId: event.get(AirtableTableEventColumns.IDS_INTERESTED)[
+              index
+            ],
+            avatar: event.get(AirtableTableEventColumns.AVATARS_INTERESTED)[
+              index
+            ],
+          }
+        })
       const mappedEventObj: EventType = {
         id: event.getId(),
         event: event.get(AirtableTableEventColumns.EVENT),
@@ -66,6 +80,7 @@ const TimelineContainer = () => {
         location: event.get(AirtableTableEventColumns.LOCATION),
         link: event.get(AirtableTableEventColumns.LINK),
         tags: event.get(AirtableTableEventColumns.TAGS) || [],
+        usersInterested: usersInterested || [],
       }
       mappedEvents.push(mappedEventObj)
     })
