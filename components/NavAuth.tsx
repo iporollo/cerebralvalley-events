@@ -22,7 +22,7 @@ export function NavAuth() {
           />
         ) : (
           <Button
-            className="flex h-fit w-fit justify-end px-2 text-xs"
+            className="flex h-fit w-fit justify-end px-4 text-xs"
             onClick={() =>
               signIn("twitter", {
                 callback: window.location.href,
