@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: siteConfig.name,
     description: siteConfig.description,
-    url: "https://cerebralvalley.ai",
-    siteName: "Cerebral Valley",
+    url: "https://events.cerebralvalley.ai",
+    siteName: "Cerebral Valley Events",
     images: [
       {
         url: "https://cerebralvalley.ai/cerebralvalley.png",

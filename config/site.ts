@@ -11,9 +11,8 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Cerebral Valley",
-  description:
-    "A community of founders and builders creating the next generation of technology.",
+  name: "Cerebral Valley Events",
+  description: "Tracking the latest AI events happening around the world.",
   mainNav: [],
   links: {
     slack:
