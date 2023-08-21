@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/apple-touch-icon.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/events/favicon.svg",
+    shortcut: "/events/apple-touch-icon.png",
+    apple: "/events/apple-touch-icon.png",
   },
   openGraph: {
     title: siteConfig.name,
