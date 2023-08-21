@@ -10,7 +10,7 @@ export default function SubmitEvent({ variant = "default" }) {
       <Button
         // @ts-ignore
         variant={variant}
-        className="flex h-fit w-full border-[#e3e3e3] bg-gray-200 text-xs text-xs dark:border-[#313035] dark:bg-black"
+        className=" flex h-fit w-full border-[#e3e3e3] bg-gray-200 text-xs text-gray-600 dark:border-[#313035] dark:bg-black dark:text-white dark:hover:text-gray-300"
         onClick={() =>
           window.open(
             "https://airtable.com/appNOa0dRcLXhHft1/shrhGUZFG8n4YAaU1",
