@@ -18,10 +18,6 @@ const nextConfig = {
         source: `/events/images/:query*`,
         destination: "/_next/image/:query*",
       },
-      {
-        source: `/api/:path*`,
-        destination: "/events/api/:path*",
-      },
     ]
   },
 }
