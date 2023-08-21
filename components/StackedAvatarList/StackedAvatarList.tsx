@@ -26,11 +26,7 @@ export default function StackedAvatarList({
               key={`${person.avatar || person.handle}${eventId}`}
               className={`inline-block h-${iconSize} w-${iconSize} rounded-full`}
               imgSrc={person.avatar}
-              handle={
-                person.handle?.includes("anonymous")
-                  ? "Anon"
-                  : person.handle || ""
-              }
+              handle={person.handle}
               showTooltip
             />
           ))}
@@ -54,10 +50,7 @@ export default function StackedAvatarList({
           />
         ))}
         <div
-          className={`flex h-${iconSize} w-${iconSize} items-center justify-center rounded-full`}
-          style={{
-            backgroundColor: "#D9D9D9",
-          }}
+          className={`flex h-${iconSize} w-${iconSize} items-center justify-center rounded-full bg-gray-700`}
         >
           <span className="text-xs">{`+${remainingImages}`}</span>
         </div>
