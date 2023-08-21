@@ -119,14 +119,20 @@ const UsersInterested = ({ event }: { event: EventType }) => {
 
   return (
     <div className="flex items-center">
-      <StackedAvatarList iconSize={6} people={usersInterested} />
-      <Button
-        variant={"ghost"}
-        className="ml-1 mr-2 flex h-fit bg-none p-0 text-xs"
-        onClick={() => submitInterest()}
-      >
-        <PlusCircle className="h-4 w-4" />
-      </Button>
+      <div className="mr-2">
+        <StackedAvatarList iconSize={6} people={usersInterested} />
+      </div>
+      {usersInterested.find(
+        (user) => user.airtableId === currentUserAirtableId
+      ) ? null : (
+        <Button
+          variant={"ghost"}
+          className="ml-[-1] mr-2 flex h-fit bg-none p-0 text-xs"
+          onClick={() => submitInterest()}
+        >
+          <PlusCircle className="h-4 w-4" />
+        </Button>
+      )}
     </div>
   )
 }
