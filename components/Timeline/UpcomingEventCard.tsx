@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
 import AirtableService from "@/src/services/airtable"
 import { AirtableTableUserColumns } from "@/src/utils/constants"
@@ -76,6 +76,9 @@ const AddToCalendar = ({ event }: { event: EventType }) => {
   // )
 }
 const UsersInterested = ({ event }: { event: EventType }) => {
+  const [usersInterested, setUsersInterested] = useState<SimpleTwitterUser[]>(
+    []
+  )
   const { data: session, status: sessionStatus } = useSession()
   const currentUserAirtableId = session?.user?.airtableRecordId
 
@@ -95,59 +98,28 @@ const UsersInterested = ({ event }: { event: EventType }) => {
 
       if (records.length === 0) {
         console.error("Couldn't update user record with interested events")
+      } else {
+        setUsersInterested([
+          ...usersInterested,
+          {
+            avatar: session?.twitter?.image!,
+            handle: session?.twitter.handle!,
+            followerCount: session?.twitter.followersCount,
+            name: session?.twitter?.handle!,
+            airtableId: session?.user?.airtableRecordId!,
+          },
+        ])
       }
+    } else {
+      signIn("twitter", {
+        callback: window.location.href,
+      })
     }
   }
 
   return (
     <div className="flex items-center">
-      <StackedAvatarList
-        iconSize={6}
-        people={[
-          {
-            avatar: "",
-            handle: "test1",
-            followerCount: 1000,
-            name: "",
-            airtableId: "",
-          },
-          {
-            avatar: "",
-            handle: "test2",
-            followerCount: 2000,
-            name: "",
-            airtableId: "",
-          },
-          {
-            avatar: "",
-            handle: "test3",
-            followerCount: 3000,
-            name: "",
-            airtableId: "",
-          },
-          {
-            avatar: "",
-            handle: "test4",
-            followerCount: 4000,
-            name: "",
-            airtableId: "",
-          },
-          {
-            avatar: "",
-            handle: "test5",
-            followerCount: 5000,
-            name: "",
-            airtableId: "",
-          },
-          {
-            avatar: "",
-            handle: "test6",
-            followerCount: 6000,
-            name: "",
-            airtableId: "",
-          },
-        ]}
-      />
+      <StackedAvatarList iconSize={6} people={usersInterested} />
       <Button
         variant={"ghost"}
         className="ml-1 mr-2 flex h-fit bg-none p-0 text-xs"

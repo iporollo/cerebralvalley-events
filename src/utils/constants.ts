@@ -25,9 +25,9 @@ enum AirtableTableEventColumns {
   LOCATION = "Location",
   LINK = "Link",
   TAGS = "Tags",
-  IDS_INTERESTED = "Users - Interested",
-  // USERS_INTERESTED = "Users Interested - Aggregate",
-  // AVATARS_INTERESTED = "Avatars Interested - Aggregate",
+  USERS_INTERESTED = "Users - Interested",
+  HANDLES_INTERESTED = "User Interested Handles",
+  AVATARS_INTERESTED = "User Interested Avatars",
 }
 
 enum AirtableTableUserColumns {
