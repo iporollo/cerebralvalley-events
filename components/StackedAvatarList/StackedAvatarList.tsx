@@ -14,9 +14,16 @@ export default function StackedAvatarList({
   iconSize = 8,
 }: StackedAvatarListProps) {
   const numAvatars = 4
-  if (!people || people.length === 0) {
+
+  // Remove duplicates in list
+  const cleanPeople =
+    people?.filter(
+      (v, i, a) => a.findIndex((v2) => v2.airtableId === v.airtableId) === i
+    ) || []
+  if (!cleanPeople || cleanPeople.length === 0) {
     return null
-  } else if (people.length < numAvatars + 2) {
+    return null
+  } else if (cleanPeople.length < numAvatars + 2) {
     return (
       <div className="flex -space-x-2 overflow-hidden">
         {people
@@ -33,7 +40,7 @@ export default function StackedAvatarList({
       </div>
     )
   } else {
-    const sortedPeople = people.sort(
+    const sortedPeople = cleanPeople.sort(
       (a, b) => b.followerCount! - a.followerCount!
     )
     const remainingImages = sortedPeople.length - numAvatars
