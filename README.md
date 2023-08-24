@@ -57,7 +57,7 @@ Fork the project, make your changes, then open a PR with your changes and we'll 
 <p align="center">
   <a href="https://cerebralvalley.beehiiv.com/">Newsletter</a>
   |
-  <a href="https://events.cerebralvalley.ai">Home</a>
+  <a href="https://cerebralvalley.ai">Home</a>
   |
   <a href="https://events.cerebralvalley.ai">Events</a>
   |
