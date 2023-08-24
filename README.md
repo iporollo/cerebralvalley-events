@@ -6,7 +6,7 @@
 
 <h1 align="center">Cerebral Valley Events</h1>
 
-This is the repository for the Cerebral Valley <a href="https://cerebralvalley.ai/slack">events page</a>.
+This is the repository for the Cerebral Valley <a href="https://events.cerebralvalley.ai/">events page</a>.
 
 # Installation
 
@@ -50,7 +50,7 @@ NEXT_PUBLIC_PUSHER_APP_CLUSTER=
 
 # Contributing
 
-Fork the project, make your changes, then open a PR with your changes and we'll review it as soon as possible. Tag @iporollo or @HowieG for review.
+Fork the project, make your changes, then open a PR with your changes and we'll review it as soon as possible. Tag [@iporollo](https://github.com/iporollo) or [@HowieG](https://github.com/howieg) for review.
 
 <br />
 
