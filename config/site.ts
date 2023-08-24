@@ -20,8 +20,7 @@ export const siteConfig: SiteConfig = {
     },
   ],
   links: {
-    slack:
-      "https://join.slack.com/t/cerebral-valley/shared_invite/zt-1x3ajihhs-XVyLxWO84uY7CCnShfI1cw",
+    slack: "https://cerebralvalley.ai/slack",
     twitter: "https://twitter.com/cerebral_valley",
   },
 }
