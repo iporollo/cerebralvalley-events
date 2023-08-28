@@ -4,7 +4,7 @@ import AirtableService from "@/src/services/airtable"
 import { AirtableTableUserColumns } from "@/src/utils/constants"
 import { mapCalEvent } from "@/src/utils/mappers/calEventMapper"
 import { buildShareUrl } from "@/src/utils/saveToCalendar"
-import { CalendarPlus, PlusCircle } from "lucide-react"
+import { CalendarPlus, Heart } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
 
 import { Badge } from "@/components/ui/badge"
@@ -122,17 +122,21 @@ const UsersInterested = ({ event }: { event: EventType }) => {
       <div className="mr-2">
         <StackedAvatarList iconSize={6} people={usersInterested} />
       </div>
-      {usersInterested.find(
-        (user) => user.airtableId === currentUserAirtableId
-      ) ? null : (
-        <Button
-          variant={"ghost"}
-          className="ml-[-1] mr-2 flex h-fit bg-none p-0 text-xs"
-          onClick={() => submitInterest()}
-        >
-          <PlusCircle className="h-4 w-4" />
-        </Button>
-      )}
+      <Button
+        variant={"ghost"}
+        className="ml-[-1] mr-2 flex h-fit bg-none p-0 text-xs"
+        onClick={() => submitInterest()}
+      >
+        <Heart
+          className={`h-4 w-4 ${
+            usersInterested.find(
+              (user) => user.airtableId === currentUserAirtableId
+            )
+              ? "fill-current text-red-500"
+              : ""
+          }`}
+        />
+      </Button>
     </div>
   )
 }
