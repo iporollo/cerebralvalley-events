@@ -39,12 +39,17 @@ const Avatar = ({
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger className="flex">
-		    <a href={`https://twitter.com/${handle}`} target="_blank" rel="noopener noreferrer">
+            <a
+              href={`https://twitter.com/${handle}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex"
+            >
               <BaseAvatar className={className}>
                 <AvatarImage src={avatarImage} alt={handle} />
                 <AvatarFallback>CV</AvatarFallback>
               </BaseAvatar>
-			</a>
+            </a>
           </TooltipTrigger>
           <TooltipContent>
             <p>{handle}</p>
