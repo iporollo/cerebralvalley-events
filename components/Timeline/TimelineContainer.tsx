@@ -14,6 +14,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import TimelineRow from "./TimelineRow"
+import { getDate, getMonth } from 'date-fns';
+
 
 const TimelineContainer = () => {
   const showPastEvents = useFilterStore((state: any) => state.showPastEvents)
@@ -112,6 +114,8 @@ const TimelineContainer = () => {
     return filteredEvents
   }
 
+  let prevStartDateMonthDay : string | undefined;
+
   return (
     <>
       {isLoading ? (
@@ -123,13 +127,19 @@ const TimelineContainer = () => {
             </div>
           </div>
         </div>
-      ) : clientFilteredEvents.length === 0 ? (
-        <div>No events found</div> // Empty state
       ) : (
-        clientFilteredEvents.map((event) => (
-          <TimelineRow key={event.id} event={event} />
-        ))
-      )}
+		clientFilteredEvents.map((event) => {
+		  const currentDate = new Date(event.startDate);
+          const currentDateMonthDay = `${getMonth(currentDate)}-${getDate(currentDate)}`;
+
+          const showDateComponent = prevStartDateMonthDay !== currentDateMonthDay;
+          prevStartDateMonthDay = currentDateMonthDay;
+  
+		  return (
+			<TimelineRow key={event.id} event={event} showDateComponent={showDateComponent} />
+		  );
+		})
+	  )}
     </>
   )
 }
