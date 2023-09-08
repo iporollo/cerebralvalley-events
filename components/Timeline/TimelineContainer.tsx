@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { useFilterStore } from "@/src/store"
+import { getDate, getMonth } from "date-fns"
 import { DateRange } from "react-day-picker"
 import AirtableService from "src/services/airtable"
 import {
@@ -14,8 +15,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 
 import TimelineRow from "./TimelineRow"
-import { getDate, getMonth } from 'date-fns';
-
 
 const TimelineContainer = () => {
   const showPastEvents = useFilterStore((state: any) => state.showPastEvents)
@@ -114,7 +113,7 @@ const TimelineContainer = () => {
     return filteredEvents
   }
 
-  let prevStartDateMonthDay : string | undefined;
+  let prevStartDateMonthDay: string | undefined
 
   return (
     <>
@@ -128,18 +127,25 @@ const TimelineContainer = () => {
           </div>
         </div>
       ) : (
-		clientFilteredEvents.map((event) => {
-		  const currentDate = new Date(event.startDate);
-          const currentDateMonthDay = `${getMonth(currentDate)}-${getDate(currentDate)}`;
+        clientFilteredEvents.map((event) => {
+          const currentDate = new Date(event.startDate)
+          const currentDateMonthDay = `${getMonth(currentDate)}-${getDate(
+            currentDate
+          )}`
 
-          const showDateComponent = prevStartDateMonthDay !== currentDateMonthDay;
-          prevStartDateMonthDay = currentDateMonthDay;
-  
-		  return (
-			<TimelineRow key={event.id} event={event} showDateComponent={showDateComponent} />
-		  );
-		})
-	  )}
+          const showDateComponent =
+            prevStartDateMonthDay !== currentDateMonthDay
+          prevStartDateMonthDay = currentDateMonthDay
+
+          return (
+            <TimelineRow
+              key={event.id}
+              event={event}
+              showDateComponent={showDateComponent}
+            />
+          )
+        })
+      )}
     </>
   )
 }

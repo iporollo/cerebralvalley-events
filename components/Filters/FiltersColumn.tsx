@@ -70,7 +70,7 @@ export default function FiltersColumn() {
       <FilterCard />
       <div>
         <a
-          href="https://docs.google.com/spreadsheets/d/1P6ut7vL-gXKbeDeh3nuPqBjoCupjIt87Sw7TnhumBSU/edit#gid=1781893986"
+          href="https://cerebralvalley.ai/sheet"
           className="text-sm font-medium text-muted-foreground hover:underline"
         >
           Back to Google Sheet

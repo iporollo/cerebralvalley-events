@@ -92,95 +92,128 @@ export default function FiltersRow() {
   }
 
   return (
-    <div className="mb-4 flex flex-row gap-2 overflow-x-auto md:hidden">
-      <DatePickerWithRange />
+    <>
+      <div className="-mt-4 mb-4 flex sm:hidden">
+        <a
+          href="https://cerebralvalley.ai/sheet"
+          className="text-sm font-medium text-muted-foreground hover:underline"
+        >
+          Back to Google Sheet
+        </a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="19"
+          height="19"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.25"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="feather feather-arrow-up-right ml-1 inline opacity-40"
+        >
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </div>
+      <div className="mb-4 flex flex-row gap-2 overflow-x-auto md:hidden">
+        <DatePickerWithRange />
 
-      <DropdownMenu>
-        <DropdownMenuTrigger className="min-w-fit max-w-fit" asChild>
-          <Button variant="outline">
-            Location
-            <ChevronDown className="h-4 w-4 opacity-50" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuCheckboxItem
-            checked={locationTypeFilters.includes(LocationTypes.ALL)}
-            onCheckedChange={() => handleLocationTypeChange(LocationTypes.ALL)}
-          >
-            All Locations
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={locationTypeFilters.includes(LocationTypes.SF)}
-            onCheckedChange={() => handleLocationTypeChange(LocationTypes.SF)}
-          >
-            San Francisco
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={locationTypeFilters.includes(LocationTypes.NYC)}
-            onCheckedChange={() => handleLocationTypeChange(LocationTypes.NYC)}
-          >
-            New York City
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={locationTypeFilters.includes(LocationTypes.LONDON)}
-            onCheckedChange={() =>
-              handleLocationTypeChange(LocationTypes.LONDON)
-            }
-          >
-            London
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={locationTypeFilters.includes(LocationTypes.REMOTE)}
-            onCheckedChange={() =>
-              handleLocationTypeChange(LocationTypes.REMOTE)
-            }
-          >
-            Remote
-          </DropdownMenuCheckboxItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="min-w-fit max-w-fit" asChild>
+            <Button variant="outline">
+              Location
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuCheckboxItem
+              checked={locationTypeFilters.includes(LocationTypes.ALL)}
+              onCheckedChange={() =>
+                handleLocationTypeChange(LocationTypes.ALL)
+              }
+            >
+              All Locations
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={locationTypeFilters.includes(LocationTypes.SF)}
+              onCheckedChange={() => handleLocationTypeChange(LocationTypes.SF)}
+            >
+              San Francisco
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={locationTypeFilters.includes(LocationTypes.NYC)}
+              onCheckedChange={() =>
+                handleLocationTypeChange(LocationTypes.NYC)
+              }
+            >
+              New York City
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={locationTypeFilters.includes(LocationTypes.LONDON)}
+              onCheckedChange={() =>
+                handleLocationTypeChange(LocationTypes.LONDON)
+              }
+            >
+              London
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={locationTypeFilters.includes(LocationTypes.REMOTE)}
+              onCheckedChange={() =>
+                handleLocationTypeChange(LocationTypes.REMOTE)
+              }
+            >
+              Remote
+            </DropdownMenuCheckboxItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
-      <DropdownMenu>
-        <DropdownMenuTrigger className="min-w-fit max-w-fit" asChild>
-          <Button variant="outline">
-            Event Type
-            <ChevronDown className="h-4 w-4 opacity-50" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuCheckboxItem
-            checked={eventTypeFilters.includes(EventTypes.ALL)}
-            onCheckedChange={() => handleEventTypeChange(EventTypes.ALL)}
-          >
-            All Events
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={eventTypeFilters.includes(EventTypes.HACKATHON)}
-            onCheckedChange={() => handleEventTypeChange(EventTypes.HACKATHON)}
-          >
-            Hackathons
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={eventTypeFilters.includes(EventTypes.CO_WORKING)}
-            onCheckedChange={() => handleEventTypeChange(EventTypes.CO_WORKING)}
-          >
-            Co-Working
-          </DropdownMenuCheckboxItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="min-w-fit max-w-fit" asChild>
+            <Button variant="outline">
+              Event Type
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuCheckboxItem
+              checked={eventTypeFilters.includes(EventTypes.ALL)}
+              onCheckedChange={() => handleEventTypeChange(EventTypes.ALL)}
+            >
+              All Events
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={eventTypeFilters.includes(EventTypes.HACKATHON)}
+              onCheckedChange={() =>
+                handleEventTypeChange(EventTypes.HACKATHON)
+              }
+            >
+              Hackathons
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem
+              checked={eventTypeFilters.includes(EventTypes.CO_WORKING)}
+              onCheckedChange={() =>
+                handleEventTypeChange(EventTypes.CO_WORKING)
+              }
+            >
+              Co-Working
+            </DropdownMenuCheckboxItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
-      <Select onValueChange={handleTabChange}>
-        <SelectTrigger className="min-w-fit max-w-fit">
-          <SelectValue
-            defaultValue={EventState.UPCOMING}
-            placeholder="Upcoming"
-          />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={EventState.UPCOMING}>Upcoming</SelectItem>
-          <SelectItem value={EventState.PAST}>Past</SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
+        <Select onValueChange={handleTabChange}>
+          <SelectTrigger className="min-w-fit max-w-fit">
+            <SelectValue
+              defaultValue={EventState.UPCOMING}
+              placeholder="Upcoming"
+            />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={EventState.UPCOMING}>Upcoming</SelectItem>
+            <SelectItem value={EventState.PAST}>Past</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </>
   )
 }
