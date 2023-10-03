@@ -8,13 +8,14 @@ type UserType = {
 
 type EventType = {
   id: string
-  event: string
+  event: string // name of event
   startDate: string
   endDate: string
   location: string
   link: string
   tags?: string[]
   usersInterested?: SimpleTwitterUser[]
+  imageUri?: string // for featured events
 }
 
 type AddToCalEvent = {

@@ -79,3 +79,68 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+.swiper-container {
+  height: 100%;
+  max-height: 100vw;
+  /* // CSS Grid/Flexbox bug size workaround
+  // @see https://github.com/kenwheeler/slick/issues/982 */
+  min-height: 0;
+  min-width: 0;
+  max-width: 100vw;
+  width: 100%;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  width: 256px !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+  height: 100%;
+  max-height: 100%;
+}
+
+.swiper-wrapper {
+  max-height: 100%;
+  height: 100%;
+  display: flex;
+}
+
+/** Swiper styles **/
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  content: '' !important;
+  font-size: 1rem;
+  line-height: 1rem;
+  font-family: none;
+}
+
+.swiper-button-next {
+  width: 2rem !important;
+  height: 2rem !important;
+  background: white;
+  border-radius: 100%;
+  right: 42% !important;
+  left: 70% !important;
+  background-image: url('/next-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.swiper-button-prev {
+  width: 2rem !important;
+  height: 2rem !important;
+  background: white;
+  border-radius: 100%;
+  background-image: url('/back-arrow.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media screen and (max-width: 991px) {
+  /* Hide carousel arrows on mobile */
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+}
