@@ -7,20 +7,20 @@ export default function FeaturedEvents() {
   let featuredEvents: EventType[] = [
     {
       id: "1",
-      event: "AI Builders Coworking at Lightspeed Venture Partners",
-      startDate: "2023-10-05T00:00:00-08:00",
-      endDate: "2023-10-05T00:00:00-08:00",
+      event: "AI Builders x Google MakerSuite Workshop",
+      startDate: "2023-10-12T17:00:00-08:00",
+      endDate: "2023-10-12T20:00:00-08:00",
       location: "San Francisco, CA",
-      link: "https://partiful.com/e/kmdZApFNjep6fpOEaAH0",
+      link: "https://partiful.com/e/abAj61tgTOvQScjl5IyP?",
       tags: [],
       usersInterested: [],
-      imageUri: "/lightspeed.webp",
+      imageUri: "/google.webp",
     },
     {
       id: "2",
       event: `Women in AI Co-Working Day with General Catalyst`,
-      startDate: "2023-10-13T00:00:00-08:00",
-      endDate: "2023-10-13T00:00:00-08:00",
+      startDate: "2023-10-13T09:00:00-08:00",
+      endDate: "2023-10-13T18:00:00-08:00",
       location: "San Francisco, CA",
       link: "https://partiful.com/e/dnClxUxp45mwgxxUnTcR",
       tags: [],
@@ -51,10 +51,19 @@ export default function FeaturedEvents() {
     },
   ]
 
+  // Get current date
+  const currentDate = new Date()
+
+  // Filter out events whose end date is less than the current date
+  const filteredEvents = featuredEvents.filter((event) => {
+    const eventEndDate = new Date(event.endDate)
+    return eventEndDate > currentDate
+  })
+
   return (
     <div className="mt-6 flex flex-col items-start justify-between overflow-hidden pb-4">
       <div className="pb-4 text-2xl">Featured Events</div>
-      <FeaturedEventsCarousel events={featuredEvents} />
+      <FeaturedEventsCarousel events={filteredEvents} />
     </div>
   )
 }
