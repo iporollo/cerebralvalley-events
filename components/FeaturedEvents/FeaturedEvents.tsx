@@ -7,9 +7,9 @@ export default function FeaturedEvents() {
   let featuredEvents: EventType[] = [
     {
       id: "1",
-      event: "AI Builders x Google MakerSuite Workshop",
-      startDate: "2023-10-12T17:00:00-08:00",
-      endDate: "2023-10-12T20:00:00-08:00",
+      event: "AI Builders x Google Workshop",
+      startDate: "2023-10-12T16:00:00-08:00",
+      endDate: "2023-10-12T19:00:00-08:00",
       location: "San Francisco, CA",
       link: "https://partiful.com/e/abAj61tgTOvQScjl5IyP?",
       tags: [],
