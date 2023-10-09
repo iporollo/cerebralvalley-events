@@ -29,7 +29,7 @@ export default function FeaturedEvents() {
     },
     {
       id: "3",
-      event: "Multimodal AI Hackathon (23 Labs)",
+      event: "TEDAI Multimodal Hackathon (23 Labs)",
       startDate: "2023-10-14T00:00:00-08:00",
       endDate: "2023-10-15T00:00:00-08:00",
       location: "San Francisco, CA",

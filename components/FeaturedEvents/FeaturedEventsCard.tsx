@@ -23,7 +23,7 @@ const FeaturedEventsCard = ({ event }: { event: EventType }) => {
           <h2 className={"text-left text-sm font-bold dark:text-white"}>
             {event.event}
           </h2>
-          {event.event.length < 28 && <div className="m-[1.3rem]" />}
+          {event.event.length <= 29 && <div className="m-[1.3rem]" />}
           <div
             className="py-1 text-sm font-normal"
             style={{
