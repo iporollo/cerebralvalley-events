@@ -16,10 +16,10 @@ export const FeaturedEventsCarousel = ({
   return (
     <div className="mb-2 grid w-[100%] justify-start">
       <Swiper
-        navigation
+        // navigation
         spaceBetween={10}
         slidesPerView={2.7}
-        modules={[Navigation]}
+        // modules={[Navigation]}
       >
         {events.map((event: EventType, idx: number) => (
           <SwiperSlide className="py-2" key={idx}>
