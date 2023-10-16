@@ -60,6 +60,11 @@ export default function FeaturedEvents() {
     return eventEndDate > currentDate
   })
 
+  // If there are no upcoming events, don't render the component
+  if (filteredEvents.length === 0) {
+    return null
+  }
+
   return (
     <div className="mt-6 flex flex-col items-start justify-between overflow-hidden pb-4">
       <div className="pb-4 text-2xl">Featured Events</div>
