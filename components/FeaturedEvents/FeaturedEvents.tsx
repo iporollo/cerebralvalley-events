@@ -7,14 +7,14 @@ export default function FeaturedEvents() {
   let featuredEvents: EventType[] = [
     {
       id: "1",
-      event: "TEDAI Day 2",
-      startDate: "2023-10-18T10:00:00-08:00",
-      endDate: "2023-10-18T18:00:00-08:00",
-      location: "San Francisco, CA",
-      link: "https://partiful.com/e/ixK2N9pdhslh7XE1lOrA",
+      event: "Anthropic London Hackathon",
+      startDate: "2023-11-04T10:00:00-00:00",
+      endDate: "2023-11-05T15:00:00-00:00",
+      location: "London, UK",
+      link: "https://partiful.com/e/pQHQrWPg1A6P31AYZMTd",
       tags: [],
       usersInterested: [],
-      imageUri: "/tedai2.png",
+      imageUri: "/anthropiclondon.png",
     },
   ]
 
