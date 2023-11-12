@@ -18,6 +18,11 @@ type EventType = {
   imageUri?: string // for featured events
 }
 
+type FeaturedEventType = EventType & {
+  paid: boolean
+  cvEvent: string
+}
+
 type AddToCalEvent = {
   description: string
   ctz?: string

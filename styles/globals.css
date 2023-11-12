@@ -144,3 +144,12 @@
     display: none !important;
   }
 }
+
+.slick-dots li button:before {
+  color: white !important; /* Change 'red' to your desired color */
+}
+
+/* Changing the color of the active dot */
+.slick-dots li.slick-active button:before {
+  color: white !important; /* Change 'blue' to your desired color for the active dot */
+}

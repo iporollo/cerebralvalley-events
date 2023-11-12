@@ -68,6 +68,20 @@ class AirtableService {
     return allRecords
   }
 
+  async fetchFeaturedEvents() {
+    let allRecords: any[] = []
+    let view = AirtableTableEventViews.FEATURED_EVENTS
+    let options = { view }
+
+    const records = await this.base(AirtableTables.EVENTS_TABLE)
+      .select(options)
+      .all()
+
+    // Hack: setting to an array of type any[] to bypass TypeScript
+    allRecords = Array.from(records)
+    return allRecords
+  }
+
   // USERS
 
   // Retrieves all users on page load for the member's directory

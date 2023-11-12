@@ -1,41 +1,83 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
+import AirtableService from "src/services/airtable"
+import { AirtableTableFeaturedEventColumns } from "src/utils/constants"
 
 import { FeaturedEventsCarousel } from "./FeaturedEventsCarousel"
 
 export default function FeaturedEvents() {
-  // Example data for the cards
-  let featuredEvents: EventType[] = [
-    {
-      id: "1",
-      event: "Anthropic London Hackathon",
-      startDate: "2023-11-04T10:00:00-00:00",
-      endDate: "2023-11-05T15:00:00-00:00",
-      location: "London, UK",
-      link: "https://partiful.com/e/pQHQrWPg1A6P31AYZMTd",
-      tags: [],
-      usersInterested: [],
-      imageUri: "/anthropiclondon.png",
-    },
-  ]
+  const [isLoading, setIsLoading] = useState(true)
+  const [featuredEvents, setFeaturedEvents] = useState<FeaturedEventType[]>([])
+  const [clientFilteredEvents, setClientFilteredEvents] = useState<
+    FeaturedEventType[]
+  >([])
 
-  // Get current date
-  const currentDate = new Date()
+  const fetchData = async () => {
+    setIsLoading(true)
 
-  // Filter out events whose end date is less than the current date
-  const filteredEvents = featuredEvents.filter((event) => {
-    const eventEndDate = new Date(event.endDate)
-    return eventEndDate > currentDate
-  })
+    const response = await AirtableService.fetchFeaturedEvents()
+
+    const mappedEvents = eventObjMapper(response)
+
+    setFeaturedEvents(mappedEvents)
+    setClientFilteredEvents(clientFilter(mappedEvents))
+
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const eventObjMapper = (events: any[]) => {
+    const mappedEvents: FeaturedEventType[] = []
+
+    events.forEach(async (event) => {
+      const imageUriArray = event.get(AirtableTableFeaturedEventColumns.IMAGE)
+      const imageUri =
+        imageUriArray && imageUriArray.length > 0 ? imageUriArray[0].url : null
+
+      const mappedEventObj: FeaturedEventType = {
+        id: event.getId(),
+        event: event.get(AirtableTableFeaturedEventColumns.EVENT),
+        startDate: event.get(AirtableTableFeaturedEventColumns.START),
+        endDate: event.get(AirtableTableFeaturedEventColumns.END),
+        location: event.get(AirtableTableFeaturedEventColumns.LOCATION),
+        link: event.get(AirtableTableFeaturedEventColumns.LINK),
+        tags: event.get(AirtableTableFeaturedEventColumns.TAGS) || [],
+        paid: event.get(AirtableTableFeaturedEventColumns.PAID),
+        cvEvent: event.get(AirtableTableFeaturedEventColumns.CVEVENT),
+        imageUri: imageUri,
+      }
+      mappedEvents.push(mappedEventObj)
+    })
+    console.log(mappedEvents)
+    return mappedEvents
+  }
+
+  const clientFilter = (events: FeaturedEventType[]) => {
+    const currentDate = new Date()
+    const filteredEvents = events.filter((event) => {
+      const eventEndDate = new Date(event.endDate)
+      if (event.cvEvent) {
+        return eventEndDate > currentDate && event.imageUri !== null
+      } else {
+        return (
+          eventEndDate > currentDate && event.imageUri !== null && event.paid
+        )
+      }
+    })
+    return filteredEvents
+  }
 
   // If there are no upcoming events, don't render the component
-  if (filteredEvents.length === 0) {
+  if (clientFilteredEvents.length === 0) {
     return null
   }
 
   return (
     <div className="mt-6 flex flex-col items-start justify-between overflow-hidden pb-4">
       <div className="pb-4 text-2xl">Featured Events</div>
-      <FeaturedEventsCarousel events={filteredEvents} />
+      <FeaturedEventsCarousel events={clientFilteredEvents} />
     </div>
   )
 }

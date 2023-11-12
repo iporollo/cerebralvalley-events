@@ -1,7 +1,9 @@
 import { format, isSameDay } from "date-fns"
 import { utcToZonedTime } from "date-fns-tz"
 
-const FeaturedEventsCard = ({ event }: { event: EventType }) => {
+import { Icons } from "@/components/icons"
+
+const FeaturedEventsCard = ({ event }: { event: FeaturedEventType }) => {
   return (
     <div
       className={`series-menu-item relative block h-full w-full cursor-pointer overflow-hidden rounded-3xl text-left`}
@@ -21,7 +23,9 @@ const FeaturedEventsCard = ({ event }: { event: EventType }) => {
         />
         <div className="border-[1px] border-x-[#e3e3e3]  border-b-[#d3d3d5] border-t-[#e7e7e9] bg-white p-3 text-[#717078] duration-200 dark:border-x-[#313035] dark:border-b-[#333237] dark:border-t-[rgba(64,63,68,1)] dark:bg-[#27262b]">
           <h2 className={"text-left text-sm font-bold dark:text-white"}>
-            {event.event}
+            {event.event.length > 55
+              ? `${event.event.substring(0, 55)}...`
+              : event.event}
           </h2>
           {event.event.length <= 29 && <div className="m-[1.3rem]" />}
           <div
@@ -74,23 +78,30 @@ const FeaturedEventsCard = ({ event }: { event: EventType }) => {
                     )}`}
               </span>
             </div>
-            <div className={"text-ssm flex items-center gap-x-2 text-left"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="17.5"
-                height="17.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-map-pin inline opacity-80"
-              >
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span>{`${event.location}`}</span>
+            <div
+              className={
+                "flex items-center justify-between gap-x-2 text-left text-sm"
+              }
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17.5"
+                  height="17.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="feather feather-map-pin inline opacity-80"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span className="ml-2">{`${event.location}`}</span>
+              </div>
+              {event.cvEvent ? <Icons.CVLogo /> : <span>Ad</span>}
             </div>
           </div>
         </div>

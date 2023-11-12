@@ -12,6 +12,7 @@ enum AirtableTableEventViews {
   ALL_EVENTS = "viwGjHO5VHWJMFaRn",
   UPCOMING_EVENTS = "viwKfbSNjj5KeKtpD",
   PAST_EVENTS = "viwzNbCT5E20LpmH5",
+  FEATURED_EVENTS = "viwBMaTjADVshTW6P",
 }
 
 enum AirtableTableUserViews {
@@ -25,6 +26,22 @@ enum AirtableTableEventColumns {
   LOCATION = "Location",
   LINK = "Link",
   TAGS = "Tags",
+  USERS_INTERESTED = "Users - Interested",
+  HANDLES_INTERESTED = "User Interested Handles",
+  AVATARS_INTERESTED = "User Interested Avatars",
+  IDS_INTERESTED = "User Interested Ids",
+}
+
+enum AirtableTableFeaturedEventColumns {
+  EVENT = "Event",
+  START = "Start",
+  END = "End",
+  LOCATION = "Location",
+  LINK = "Link",
+  TAGS = "Tags",
+  PAID = "Paid",
+  CVEVENT = "CVEvent",
+  IMAGE = "Image",
   USERS_INTERESTED = "Users - Interested",
   HANDLES_INTERESTED = "User Interested Handles",
   AVATARS_INTERESTED = "User Interested Avatars",
@@ -69,6 +86,7 @@ export {
   AirtableTableEventViews,
   AirtableTableUserViews,
   AirtableTableEventColumns,
+  AirtableTableFeaturedEventColumns,
   AirtableTableUserColumns,
   EventState,
   EventTypes,
