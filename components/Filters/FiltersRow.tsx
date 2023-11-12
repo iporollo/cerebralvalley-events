@@ -68,6 +68,11 @@ export default function FiltersRow() {
       modifiedEventTypeFilters.push(eventType)
     }
 
+    // If no event types are selected, select all events by default
+    if (modifiedEventTypeFilters.length === 0) {
+      modifiedEventTypeFilters = [EventTypes.ALL]
+    }
+
     setEventTypeFilters(modifiedEventTypeFilters)
   }
 
@@ -86,6 +91,10 @@ export default function FiltersRow() {
       )
     } else {
       modifiedLocationTypeFilters.push(locationType)
+    }
+
+    if (modifiedLocationTypeFilters.length === 0) {
+      modifiedLocationTypeFilters = [LocationTypes.ALL]
     }
 
     setLocationTypeFilters(modifiedLocationTypeFilters)
@@ -136,10 +145,12 @@ export default function FiltersRow() {
               All Locations
             </DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem
-              checked={locationTypeFilters.includes(LocationTypes.SF)}
-              onCheckedChange={() => handleLocationTypeChange(LocationTypes.SF)}
+              checked={locationTypeFilters.includes(LocationTypes.BAY_AREA)}
+              onCheckedChange={() =>
+                handleLocationTypeChange(LocationTypes.BAY_AREA)
+              }
             >
-              San Francisco
+              SF & Bay Area
             </DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem
               checked={locationTypeFilters.includes(LocationTypes.NYC)}

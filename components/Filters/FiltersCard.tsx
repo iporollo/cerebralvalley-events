@@ -46,6 +46,11 @@ export default function FiltersCard() {
       modifiedEventTypeFilters.push(eventType)
     }
 
+    // If no event types are selected, select all events by default
+    if (modifiedEventTypeFilters.length === 0) {
+      modifiedEventTypeFilters = [EventTypes.ALL]
+    }
+
     setEventTypeFilters(modifiedEventTypeFilters)
   }
 
@@ -64,6 +69,10 @@ export default function FiltersCard() {
       )
     } else {
       modifiedLocationTypeFilters.push(locationType)
+    }
+
+    if (modifiedLocationTypeFilters.length === 0) {
+      modifiedLocationTypeFilters = [LocationTypes.ALL]
     }
 
     setLocationTypeFilters(modifiedLocationTypeFilters)
@@ -131,15 +140,17 @@ export default function FiltersCard() {
         </div>
         <div className="my-2 flex items-center space-x-2">
           <Checkbox
-            id={LocationTypes.SF}
-            checked={locationTypeFilters.includes(LocationTypes.SF)}
-            onCheckedChange={() => handleLocationTypeChange(LocationTypes.SF)}
+            id={LocationTypes.BAY_AREA}
+            checked={locationTypeFilters.includes(LocationTypes.BAY_AREA)}
+            onCheckedChange={() =>
+              handleLocationTypeChange(LocationTypes.BAY_AREA)
+            }
           />
           <label
-            htmlFor={LocationTypes.SF}
+            htmlFor={LocationTypes.BAY_AREA}
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
-            San Francisco
+            SF & Bay Area
           </label>
         </div>
         <div className="my-2 flex items-center space-x-2">

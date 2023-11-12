@@ -7,6 +7,7 @@ import { DateRange } from "react-day-picker"
 import AirtableService from "src/services/airtable"
 import {
   AirtableTableEventColumns,
+  BAY_AREA_CITIES,
   EventTypes,
   LocationTypes,
 } from "src/utils/constants"
@@ -103,7 +104,9 @@ const TimelineContainer = () => {
     if (!locationTypeFilters.includes(LocationTypes.ALL)) {
       filteredEvents = filteredEvents.filter((event) => {
         for (let i = 0; i < locationTypeFilters.length; i++) {
-          if (event.location === locationTypeFilters[i]) {
+          if (locationTypeFilters[i] === LocationTypes.BAY_AREA) {
+            return BAY_AREA_CITIES.includes(event.location)
+          } else if (event.location === locationTypeFilters[i]) {
             return true
           }
         }

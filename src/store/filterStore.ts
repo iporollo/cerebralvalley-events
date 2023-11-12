@@ -9,7 +9,7 @@ export const useFilterStore = create((set) => ({
   eventTypeFilters: [EventTypes.ALL],
   setEventTypeFilters: (input: string[]) =>
     set((state: any) => ({ eventTypeFilters: input })),
-  locationTypeFilters: [LocationTypes.ALL],
+  locationTypeFilters: [LocationTypes.BAY_AREA, LocationTypes.REMOTE],
   setLocationTypeFilters: (input: string[]) =>
     set((state: any) => ({ locationTypeFilters: input })),
   dateFilter: undefined,
