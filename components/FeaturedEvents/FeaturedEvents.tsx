@@ -50,7 +50,7 @@ export default function FeaturedEvents() {
       }
       mappedEvents.push(mappedEventObj)
     })
-    console.log(mappedEvents)
+
     return mappedEvents
   }
 
