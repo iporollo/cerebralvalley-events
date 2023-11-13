@@ -12,7 +12,7 @@ type FeaturedEventsCarouselProps = {
 export const FeaturedEventsCarousel = ({
   events,
 }: FeaturedEventsCarouselProps) => {
-  const [slidesToShow, setSlidesToShow] = useState(3)
+  const [slidesToShow, setSlidesToShow] = useState(0)
 
   useEffect(() => {
     const handleResize = () => {
