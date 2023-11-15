@@ -16,7 +16,7 @@ export const FeaturedEventsCarousel = ({
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 500) {
+      if (window.innerWidth < 768) {
         setSlidesToShow(1)
       } else if (events.length <= 2) {
         setSlidesToShow(events.length)
@@ -36,7 +36,7 @@ export const FeaturedEventsCarousel = ({
 
   var sliderSettings = {
     dots: false,
-    arrows: false,
+    arrows: slidesToShow === 1,
     infinite: true,
     fade: false,
     pauseOnHover: true,
