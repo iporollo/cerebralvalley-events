@@ -91,13 +91,23 @@ export default function FeaturedEvents() {
       }
     })
 
-    const sortedEvents = prioritizeCvEvents(filteredEvents)
+    const sortedEvents = sortEvents(filteredEvents)
 
     return sortedEvents
   }
 
-  const prioritizeCvEvents = (events: FeaturedEventType[]) => {
-    return events.sort((a, b) => (b.cvEvent ? 1 : -1))
+  const sortEvents = (events: FeaturedEventType[]) => {
+    return events.sort((a, b) => {
+      // Prioritize CV events
+      if (b.cvEvent && !a.cvEvent) return 1
+      if (a.cvEvent && !b.cvEvent) return -1
+
+      // If neither or both are CV events, sort by startDate
+      const aStartDate = new Date(a.startDate)
+      const bStartDate = new Date(b.startDate)
+
+      return aStartDate > bStartDate ? 1 : -1
+    })
   }
 
   // If there are no upcoming events, don't render the component

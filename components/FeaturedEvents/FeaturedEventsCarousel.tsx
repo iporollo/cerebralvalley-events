@@ -20,7 +20,7 @@ export const FeaturedEventsCarousel = ({
         setSlidesToShow(1)
       } else if (events.length <= 2) {
         setSlidesToShow(events.length)
-      } else if (window.innerWidth > 768 && window.innerWidth <= 1320) {
+      } else if (window.innerWidth <= 1320) {
         setSlidesToShow(2)
       } else {
         setSlidesToShow(3)
