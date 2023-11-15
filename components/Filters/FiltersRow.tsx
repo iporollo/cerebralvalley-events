@@ -126,9 +126,10 @@ export default function FiltersRow() {
         </svg>
       </div>
       <div className="mb-4 flex flex-row gap-2 overflow-x-auto md:hidden">
-        <DatePickerWithRange />
-
         <DropdownMenu>
+          <DropdownMenuTrigger className="min-w-fit max-w-fit" asChild>
+            <DatePickerWithRange />
+          </DropdownMenuTrigger>
           <DropdownMenuTrigger className="min-w-fit max-w-fit" asChild>
             <Button variant="outline">
               Location
