@@ -6,6 +6,7 @@ import { mapCalEvent } from "@/src/utils/mappers/calEventMapper"
 import { buildShareUrl } from "@/src/utils/saveToCalendar"
 import { CalendarPlus, Heart } from "lucide-react"
 import { signIn, useSession } from "next-auth/react"
+import posthog from "posthog-js"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -161,7 +162,14 @@ export default function UpcomingEventCard({ event }: { event: EventType }) {
             minute: "numeric",
           })}
         </p>
-        <a href={event.link} target="_blank" rel="noreferrer">
+        <a
+          href={event.link}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => {
+            posthog.capture("event-click")
+          }}
+        >
           <h3 className="my-1 text-lg font-medium text-gray-900 hover:underline dark:font-normal dark:text-white">
             {event.event}
             <svg

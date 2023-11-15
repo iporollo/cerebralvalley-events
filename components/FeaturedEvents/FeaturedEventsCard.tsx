@@ -1,5 +1,6 @@
 import { format, isSameDay } from "date-fns"
 import { utcToZonedTime } from "date-fns-tz"
+import posthog from "posthog-js"
 
 import { Icons } from "@/components/icons"
 
@@ -9,6 +10,12 @@ const FeaturedEventsCard = ({ event }: { event: FeaturedEventType }) => {
       className={`series-menu-item relative block h-full w-full cursor-pointer overflow-hidden rounded-3xl text-left`}
       onClick={(e) => {
         e.stopPropagation()
+        posthog.capture("click-featured-event", {
+          event: event.event,
+          startDate: event.startDate,
+          endDate: event.endDate,
+          link: event.link,
+        })
         window.open(event.link, "_blank")
       }}
     >

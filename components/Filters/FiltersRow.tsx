@@ -5,6 +5,7 @@ import { useFilterStore } from "@/src/store"
 import { EventState, EventTypes, LocationTypes } from "@/src/utils/constants"
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 import { ChevronDown } from "lucide-react"
+import posthog from "posthog-js"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -52,6 +53,8 @@ export default function FiltersRow() {
   )
 
   const handleEventTypeChange = (eventType: EventTypes) => {
+    posthog.capture("click-event-type-filter", { event_type: eventType })
+
     let modifiedEventTypeFilters = [...eventTypeFilters]
 
     if (eventTypeFilters.includes(EventTypes.ALL)) {
@@ -77,6 +80,8 @@ export default function FiltersRow() {
   }
 
   const handleLocationTypeChange = (locationType: LocationTypes) => {
+    posthog.capture("click-location-filter", { location_type: locationType })
+
     let modifiedLocationTypeFilters = [...locationTypeFilters]
 
     if (locationTypeFilters.includes(LocationTypes.ALL)) {
@@ -106,6 +111,7 @@ export default function FiltersRow() {
         <a
           href="https://cerebralvalley.ai/sheet"
           className="text-sm font-medium text-muted-foreground hover:underline"
+          onClick={() => posthog.capture("click-google-sheet")}
         >
           Back to Google Sheet
         </a>

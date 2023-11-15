@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import { useFilterStore } from "@/src/store"
 import { EventTypes, LocationTypes } from "@/src/utils/constants"
+import posthog from "posthog-js"
 
 import {
   Card,
@@ -30,6 +31,7 @@ export default function FiltersCard() {
   )
 
   const handleEventTypeChange = (eventType: EventTypes) => {
+    posthog.capture("click-event-type-filter", { event_type: eventType })
     let modifiedEventTypeFilters = [...eventTypeFilters]
 
     if (eventTypeFilters.includes(EventTypes.ALL)) {
@@ -55,6 +57,7 @@ export default function FiltersCard() {
   }
 
   const handleLocationTypeChange = (locationType: LocationTypes) => {
+    posthog.capture("click-location-filter", { location_type: locationType })
     let modifiedLocationTypeFilters = [...locationTypeFilters]
 
     if (locationTypeFilters.includes(LocationTypes.ALL)) {

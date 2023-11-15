@@ -4,6 +4,7 @@ import { useFilterStore } from "@/src/store"
 import { EventState } from "@/src/utils/constants"
 import { format } from "date-fns"
 import { XIcon } from "lucide-react"
+import posthog from "posthog-js"
 
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -58,7 +59,10 @@ export default function FiltersColumn() {
               Upcoming
             </TabsTrigger>
             <TabsTrigger
-              onClick={() => handleTabChange(EventState.PAST)}
+              onClick={() => {
+                posthog.capture("click-past-events-tab")
+                handleTabChange(EventState.PAST)
+              }}
               value={EventState.PAST}
             >
               Past
@@ -72,6 +76,7 @@ export default function FiltersColumn() {
         <a
           href="https://cerebralvalley.ai/sheet"
           className="text-sm font-medium text-muted-foreground hover:underline"
+          onClick={() => posthog.capture("click-google-sheet")}
         >
           Back to Google Sheet
         </a>

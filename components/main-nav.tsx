@@ -1,5 +1,6 @@
 import * as React from "react"
 import Link from "next/link"
+import posthog from "posthog-js"
 
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
@@ -31,6 +32,11 @@ export function MainNav({ items }: MainNavProps) {
                     "flex h-fit w-fit justify-end px-4 py-2 text-xs",
                     item.disabled && "cursor-not-allowed opacity-80"
                   )}
+                  onClick={() => {
+                    if (item.title === "Google Sheet") {
+                      posthog.capture("click-google-sheet")
+                    }
+                  }}
                 >
                   {item.title}
                 </Link>
