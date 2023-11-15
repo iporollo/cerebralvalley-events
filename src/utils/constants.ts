@@ -36,6 +36,8 @@ enum AirtableTableFeaturedEventColumns {
   EVENT = "Event",
   START = "Start",
   END = "End",
+  FEATURED_START = "Featured Start",
+  FEATURED_END = "Featured End",
   LOCATION = "Location",
   LINK = "Link",
   TAGS = "Tags",

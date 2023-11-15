@@ -41,6 +41,12 @@ export default function FeaturedEvents() {
         event: event.get(AirtableTableFeaturedEventColumns.EVENT),
         startDate: event.get(AirtableTableFeaturedEventColumns.START),
         endDate: event.get(AirtableTableFeaturedEventColumns.END),
+        featuredStartDate: event.get(
+          AirtableTableFeaturedEventColumns.FEATURED_START
+        ),
+        featuredEndDate: event.get(
+          AirtableTableFeaturedEventColumns.FEATURED_END
+        ),
         location: event.get(AirtableTableFeaturedEventColumns.LOCATION),
         link: event.get(AirtableTableFeaturedEventColumns.LINK),
         tags: event.get(AirtableTableFeaturedEventColumns.TAGS) || [],
@@ -58,11 +64,29 @@ export default function FeaturedEvents() {
     const currentDate = new Date()
     const filteredEvents = events.filter((event) => {
       const eventEndDate = new Date(event.endDate)
+      const featuredStartDate = event.featuredStartDate
+        ? new Date(event.featuredStartDate)
+        : null
+      const featuredEndDate = event.featuredEndDate
+        ? new Date(event.featuredEndDate)
+        : null
+
+      // Check if event is between featuredStartDate and featuredEndDate
+      const isFeatured =
+        featuredStartDate && featuredEndDate
+          ? currentDate >= featuredStartDate && currentDate <= featuredEndDate
+          : true
+
       if (event.cvEvent) {
-        return eventEndDate > currentDate && event.imageUri !== null
+        return (
+          isFeatured && eventEndDate > currentDate && event.imageUri !== null
+        )
       } else {
         return (
-          eventEndDate > currentDate && event.imageUri !== null && event.paid
+          isFeatured &&
+          eventEndDate > currentDate &&
+          event.imageUri !== null &&
+          event.paid
         )
       }
     })

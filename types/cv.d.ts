@@ -19,6 +19,8 @@ type EventType = {
 }
 
 type FeaturedEventType = EventType & {
+  featuredStartDate: string | undefined
+  featuredEndDate: string | undefined
   paid: boolean
   cvEvent: string
 }
