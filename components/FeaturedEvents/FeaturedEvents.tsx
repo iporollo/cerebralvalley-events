@@ -90,7 +90,14 @@ export default function FeaturedEvents() {
         )
       }
     })
-    return filteredEvents
+
+    const sortedEvents = prioritizeCvEvents(filteredEvents)
+
+    return sortedEvents
+  }
+
+  const prioritizeCvEvents = (events: FeaturedEventType[]) => {
+    return events.sort((a, b) => (b.cvEvent ? 1 : -1))
   }
 
   // If there are no upcoming events, don't render the component
