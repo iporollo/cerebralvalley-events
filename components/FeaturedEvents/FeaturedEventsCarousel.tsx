@@ -16,7 +16,9 @@ export const FeaturedEventsCarousel = ({
 
   useEffect(() => {
     const handleResize = () => {
-      if (events.length <= 2) {
+      if (window.innerWidth < 500) {
+        setSlidesToShow(1)
+      } else if (events.length <= 2) {
         setSlidesToShow(events.length)
       } else if (window.innerWidth > 768 && window.innerWidth <= 1320) {
         setSlidesToShow(2)
@@ -33,14 +35,17 @@ export const FeaturedEventsCarousel = ({
   }, [events])
 
   var sliderSettings = {
-    dots: true,
-    dotsClass: "slick-dots",
+    dots: false,
     arrows: false,
     infinite: true,
     fade: false,
     pauseOnHover: true,
     className: `w-full ${
-      slidesToShow === 3 ? "w-[794px]" : "max-w-[794px]"
+      slidesToShow === 3
+        ? "w-[794px]"
+        : slidesToShow === 1
+        ? "max-w-[280px]"
+        : "max-w-[794px]"
     } md:overflow-hidden`,
     autoplay: true,
     autoplaySpeed: 6000,
@@ -50,7 +55,7 @@ export const FeaturedEventsCarousel = ({
   }
 
   return (
-    <div className="mb-2 grid w-[100%] justify-start">
+    <div className="mb-2 grid w-[100%] justify-center md:justify-start">
       <Slider {...sliderSettings}>
         {events.map((event: FeaturedEventType, idx: number) => (
           <div className="p-2" key={idx}>
