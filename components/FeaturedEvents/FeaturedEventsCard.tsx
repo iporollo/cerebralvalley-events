@@ -108,7 +108,11 @@ const FeaturedEventsCard = ({ event }: { event: FeaturedEventType }) => {
                 </svg>
                 <span className="ml-2">{`${event.location}`}</span>
               </div>
-              {event.cvEvent ? <Icons.CVLogo /> : <span>Ad</span>}
+              {event.cvEvent ? (
+                <Icons.CVLogo />
+              ) : (
+                <span style={{ fontSize: 10 }}>Ad</span>
+              )}
             </div>
           </div>
         </div>
