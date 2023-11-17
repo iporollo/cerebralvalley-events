@@ -39,7 +39,7 @@ export const FeaturedEventsCarousel = ({
     arrows: slidesToShow === 1,
     infinite: true,
     fade: false,
-    pauseOnHover: true,
+    pauseOnHover: false,
     className: `w-full ${
       slidesToShow === 3
         ? "w-[794px]"
