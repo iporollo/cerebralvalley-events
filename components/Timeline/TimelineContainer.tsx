@@ -103,14 +103,18 @@ const TimelineContainer = () => {
     }
     if (!locationTypeFilters.includes(LocationTypes.ALL)) {
       filteredEvents = filteredEvents.filter((event) => {
-        for (let i = 0; i < locationTypeFilters.length; i++) {
-          if (locationTypeFilters[i] === LocationTypes.BAY_AREA) {
-            return BAY_AREA_CITIES.includes(event.location)
-          } else if (event.location === locationTypeFilters[i]) {
-            return true
+        return locationTypeFilters.some((locationTypeFilter: string) => {
+          switch (locationTypeFilter) {
+            case LocationTypes.BAY_AREA:
+              return BAY_AREA_CITIES.includes(event.location)
+            case LocationTypes.REMOTE:
+              return event.location === "Remote"
+            case LocationTypes.NYC:
+              return event.location === "New York, NY"
+            case LocationTypes.LONDON:
+              return event.location === "London, UK"
           }
-        }
-        return false
+        })
       })
     }
     return filteredEvents
