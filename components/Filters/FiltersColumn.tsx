@@ -10,7 +10,8 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FilterCard from "@/components/Filters/FiltersCard"
-import SubmitEvent from "@/components/SubmitEvent"
+
+import SubmitEventDialog from "../SubmitEventDialog"
 
 export default function FiltersColumn() {
   const setShowPastEvents = useFilterStore(
@@ -40,7 +41,7 @@ export default function FiltersColumn() {
 
   return (
     <div className="mx-8 hidden flex-col md:mx-2 md:flex">
-      <SubmitEvent variant="outline" />
+      <SubmitEventDialog />
       <Calendar />
       {dateFilter ? (
         <div className="inline-flex h-10 items-center justify-between rounded-lg border border-[#e3e3e3] bg-transparent p-1 dark:border-[#313035]">

@@ -5,8 +5,9 @@ import { useFilterStore } from "@/src/store"
 
 import FeaturedEvents from "@/components/FeaturedEvents/FeaturedEvents"
 import FiltersRow from "@/components/Filters/FiltersRow"
-import SubmitEvent from "@/components/SubmitEvent"
 import TimelineContainer from "@/components/Timeline/TimelineContainer"
+
+import SubmitEventDialog from "./SubmitEventDialog"
 
 export default function EventsColumn() {
   const showPastEvents = useFilterStore((state: any) => state.showPastEvents)
@@ -21,7 +22,7 @@ export default function EventsColumn() {
             {showPastEvents ? "Past Events" : "Upcoming Events"}
           </div>
           <div className="md:hidden">
-            <SubmitEvent />
+            <SubmitEventDialog />
           </div>
         </div>
         <TimelineContainer />
