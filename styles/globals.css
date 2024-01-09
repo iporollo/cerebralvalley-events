@@ -153,3 +153,7 @@
 .slick-dots li.slick-active button:before {
   color: white !important; /* Change 'blue' to your desired color for the active dot */
 }
+
+.slick-track {
+  width: 250px !important;
+}
