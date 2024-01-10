@@ -3,6 +3,7 @@ import Link from "next/link"
 import { setHours, setMinutes } from "date-fns"
 import { CheckCircle, Loader, Plus } from "lucide-react"
 import DatePicker from "react-datepicker"
+import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -32,7 +33,9 @@ export default function SubmitEventDialog() {
   const [email, setEmail] = useState<string | undefined>(undefined)
   const [name, setName] = useState<string | undefined>(undefined)
   const [startDate, setStartDate] = useState<Date | null>(null)
+  const [startDateOpen, setStartDateOpen] = useState(false)
   const [endDate, setEndDate] = useState<Date | null>(null)
+  const [endDateOpen, setEndDateOpen] = useState(false)
   const [location, setLocation] = useState<string | undefined>(undefined)
   const [showOtherLocation, setShowOtherLocation] = useState(false)
   const [link, setLink] = useState<string | undefined>(undefined)
@@ -72,13 +75,15 @@ export default function SubmitEventDialog() {
 
     if (response.ok) {
       console.log("Form submitted successfully")
+      toast("Event submitted.")
       clearState()
+      setLoading(false)
+      setOpen(false)
     } else {
       console.log("Form submission failed")
+      toast("Event submission failed, please try again.")
+      setLoading(false)
     }
-
-    setLoading(false)
-    setOpen(false)
   }
 
   return (
@@ -134,11 +139,16 @@ export default function SubmitEventDialog() {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="flex flex-col space-y-1">
                   <Label htmlFor="start-date-time" className="mb-2">
-                    Start Date/Time (PST)*
+                    Start Date/Time (PST) *
                   </Label>
                   <DatePicker
+                    open={startDateOpen}
+                    onInputClick={() => setStartDateOpen(true)}
+                    onClickOutside={() => setStartDateOpen(false)}
                     selected={startDate}
-                    onChange={(date: any) => setStartDate(date)}
+                    onChange={(date: any) => {
+                      setStartDate(date)
+                    }}
                     dateFormat="MMMM d, yyyy h:mm aa"
                     showTimeSelect
                     id="start-date-time"
@@ -149,11 +159,16 @@ export default function SubmitEventDialog() {
                 </div>
                 <div className="flex flex-col space-y-1">
                   <Label htmlFor="end-date-time" className="mb-2">
-                    End Date/Time (PST)*
+                    End Date/Time (PST) *
                   </Label>
                   <DatePicker
+                    open={endDateOpen}
                     selected={endDate}
-                    onChange={(date: any) => setEndDate(date)}
+                    onInputClick={() => setEndDateOpen(true)}
+                    onClickOutside={() => setEndDateOpen(false)}
+                    onChange={(date: any) => {
+                      setEndDate(date)
+                    }}
                     dateFormat="MMMM d, yyyy h:mm aa"
                     showTimeSelect
                     id="end-date-time"
@@ -168,6 +183,10 @@ export default function SubmitEventDialog() {
                   Location *
                 </Label>
                 <Select
+                  onOpenChange={() => {
+                    setStartDateOpen(false)
+                    setEndDateOpen(false)
+                  }}
                   value={location}
                   onValueChange={(value: string) => {
                     setLocation(value)
@@ -221,7 +240,7 @@ export default function SubmitEventDialog() {
                     className="border-none bg-black text-white ring-1 ring-[#333237] focus:ring-1 focus:ring-white focus:ring-offset-1 focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1"
                     style={{ marginTop: 8 }}
                     id="other-location"
-                    placeholder="Enter the location"
+                    placeholder="Enter the event location (City, State)"
                     required
                   />
                 )}

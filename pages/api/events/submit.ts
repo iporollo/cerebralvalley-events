@@ -24,16 +24,20 @@ export default async function handler(
           name,
           description: "",
           start: startDate,
+          end: endDate,
           location,
           link,
-          end: endDate,
           submitter: email,
           feature: featured,
         }),
       })
 
       if (!response.ok) {
-        throw new Error("Network response was not ok")
+        const errorData = await response.json() // Get error message from the API response
+        res
+          .status(response.status)
+          .json({ message: errorData.message || "Network response was not ok" })
+        return
       }
 
       res.status(200).json({ message: "Form submitted successfully" })
