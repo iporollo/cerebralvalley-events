@@ -209,9 +209,9 @@ export default function FiltersRow() {
               Hackathons
             </DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem
-              checked={eventTypeFilters.includes(EventTypes.CO_WORKING)}
+              checked={eventTypeFilters.includes(EventTypes.COWORKING)}
               onCheckedChange={() =>
-                handleEventTypeChange(EventTypes.CO_WORKING)
+                handleEventTypeChange(EventTypes.COWORKING)
               }
             >
               Co-Working

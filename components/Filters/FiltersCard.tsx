@@ -116,12 +116,12 @@ export default function FiltersCard() {
         </div>
         <div className="my-2 flex items-center space-x-2">
           <Checkbox
-            id={EventTypes.CO_WORKING}
-            checked={eventTypeFilters.includes(EventTypes.CO_WORKING)}
-            onCheckedChange={() => handleEventTypeChange(EventTypes.CO_WORKING)}
+            id={EventTypes.COWORKING}
+            checked={eventTypeFilters.includes(EventTypes.COWORKING)}
+            onCheckedChange={() => handleEventTypeChange(EventTypes.COWORKING)}
           />
           <label
-            htmlFor={EventTypes.CO_WORKING}
+            htmlFor={EventTypes.COWORKING}
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
             Co-Working

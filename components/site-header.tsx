@@ -35,13 +35,13 @@ export function SiteHeader() {
                   })
                   .sort((a, b) => {
                     if (
-                      a.handle.includes("anonymous") &&
-                      !b.handle.includes("anonymous")
+                      a.handle.includes("anon") &&
+                      !b.handle.includes("anon")
                     ) {
                       return 1 // a should be placed after b
                     } else if (
-                      !a.handle.includes("anonymous") &&
-                      b.handle.includes("anonymous")
+                      !a.handle.includes("anon") &&
+                      b.handle.includes("anon")
                     ) {
                       return -1 // a should be placed before b
                     }

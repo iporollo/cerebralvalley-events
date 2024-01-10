@@ -11,7 +11,10 @@ export default function TimelineRow({
   return (
     <div className="flex-row border-l-2 border-dashed border-[#e8e8ea] pb-10 dark:border-[#28272c]">
       {showDateComponent && (
-        <DateComponent startDate={event.startDate} endDate={event.endDate} />
+        <DateComponent
+          startDate={event.startDateTime}
+          endDate={event.endDateTime}
+        />
       )}
       <UpcomingEventCard event={event} />
     </div>

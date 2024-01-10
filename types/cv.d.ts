@@ -8,17 +8,16 @@ type UserType = {
 
 type EventType = {
   id: string
-  event: string // name of event
-  startDate: string
-  endDate: string
+  name: string // name of event
+  startDateTime: string
+  endDateTime: string
   location: string
-  link: string
-  tags?: string[]
-  usersInterested?: SimpleTwitterUser[]
-  imageUri?: string // for featured events
+  url: string
+  type?: string
 }
 
 type FeaturedEventType = EventType & {
+  imageLink?: string
   featuredStartDate: string | undefined
   featuredEndDate: string | undefined
   paid: boolean
