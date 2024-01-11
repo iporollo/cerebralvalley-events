@@ -11,8 +11,6 @@ export default async function handler(
     const { email, name, startDate, endDate, location, link, featured } =
       req.body
 
-    console.log(req.body)
-
     try {
       const response = await fetch(`${process.env.API_HOST}/v1/events/ingest`, {
         method: "POST",

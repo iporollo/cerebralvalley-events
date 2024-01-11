@@ -73,30 +73,6 @@ export default function FiltersColumn() {
       )}
 
       <FilterCard />
-      <div>
-        <a
-          href="https://cerebralvalley.ai/sheet"
-          className="text-sm font-medium text-muted-foreground hover:underline"
-          onClick={() => posthog.capture("click-google-sheet")}
-        >
-          Back to Google Sheet
-        </a>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="19"
-          height="19"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.25"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="feather feather-arrow-up-right ml-1 inline opacity-40"
-        >
-          <line x1="7" y1="17" x2="17" y2="7"></line>
-          <polyline points="7 7 17 7 17 17"></polyline>
-        </svg>
-      </div>
     </div>
   )
 }

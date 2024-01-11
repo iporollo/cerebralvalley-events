@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import Link from "next/link"
-import { setHours, setMinutes } from "date-fns"
-import { CheckCircle, Loader, Plus } from "lucide-react"
+import { BAY_AREA_CITIES } from "@/src/utils/constants"
+import { Loader, Plus } from "lucide-react"
 import DatePicker from "react-datepicker"
+import Select from "react-select"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
@@ -10,7 +10,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -18,26 +17,79 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 import "react-datepicker/dist/react-datepicker.css"
+
+const bayAreaOptions = BAY_AREA_CITIES.map((city) => ({
+  value: city,
+  label: city,
+}))
+
+const locationSelectOptions = [
+  ...bayAreaOptions,
+  { value: "New York City, NY", label: "New York City, NY" },
+  { value: "London, UK", label: "London, UK" },
+  { value: "Remote", label: "Remote" },
+  { value: "Other", label: "Other" },
+]
+
+const locationSelectCustomStyles = {
+  input: (provided: any) => ({
+    ...provided,
+    color: "white",
+  }),
+  control: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: "black",
+    color: "white",
+    border: "1px solid #333237", // Add default border
+    boxShadow: state.isFocused ? "0 0 0 1px white" : "none", // Add boxShadow to mimic focus ring when focused
+    fontSize: "14px",
+  }),
+  dropdownIndicator: (provided: any, state: any) => ({
+    ...provided,
+    color: state.isFocused ? "white" : "#333237",
+    "&:hover": {
+      color: state.isFocused ? "white" : "#333237",
+    },
+  }),
+  indicatorSeparator: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "white" : "#333237",
+  }),
+  clearIndicator: (provided: any, state: any) => ({
+    ...provided,
+    color: "#333237",
+  }),
+  singleValue: (provided: any, state: any) => ({
+    ...provided,
+    color: "white",
+  }),
+  menu: (provided: any) => ({
+    ...provided,
+    backgroundColor: "black",
+    color: "white",
+    fontSize: "14px",
+  }),
+  option: (provided: any, state: any) => ({
+    ...provided,
+    color: state.isFocused ? "black" : "white",
+    backgroundColor: state.isFocused ? "white" : "black",
+  }),
+  ":active": {
+    backgroundColor: "white",
+  },
+}
 
 export default function SubmitEventDialog() {
   const [open, setOpen] = React.useState(false)
   const [email, setEmail] = useState<string | undefined>(undefined)
   const [name, setName] = useState<string | undefined>(undefined)
   const [startDate, setStartDate] = useState<Date | null>(null)
-  const [startDateOpen, setStartDateOpen] = useState(false)
   const [endDate, setEndDate] = useState<Date | null>(null)
-  const [endDateOpen, setEndDateOpen] = useState(false)
-  const [location, setLocation] = useState<string | undefined>(undefined)
-  const [showOtherLocation, setShowOtherLocation] = useState(false)
+  const [location, setLocation] = useState<
+    { value: string; label: string } | undefined
+  >(undefined)
   const [link, setLink] = useState<string | undefined>(undefined)
   const [featured, setFeatured] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -48,7 +100,6 @@ export default function SubmitEventDialog() {
     setStartDate(null)
     setEndDate(null)
     setLocation(undefined)
-    setShowOtherLocation(false)
     setLink("")
     setFeatured(false)
   }
@@ -67,7 +118,7 @@ export default function SubmitEventDialog() {
         name,
         startDate,
         endDate,
-        location,
+        location: location?.value,
         link,
         featured,
       }),
@@ -142,9 +193,6 @@ export default function SubmitEventDialog() {
                     Start Date/Time (PST) *
                   </Label>
                   <DatePicker
-                    open={startDateOpen}
-                    onInputClick={() => setStartDateOpen(true)}
-                    onClickOutside={() => setStartDateOpen(false)}
                     selected={startDate}
                     onChange={(date: any) => {
                       setStartDate(date)
@@ -162,10 +210,7 @@ export default function SubmitEventDialog() {
                     End Date/Time (PST) *
                   </Label>
                   <DatePicker
-                    open={endDateOpen}
                     selected={endDate}
-                    onInputClick={() => setEndDateOpen(true)}
-                    onClickOutside={() => setEndDateOpen(false)}
                     onChange={(date: any) => {
                       setEndDate(date)
                     }}
@@ -183,67 +228,29 @@ export default function SubmitEventDialog() {
                   Location *
                 </Label>
                 <Select
-                  onOpenChange={() => {
-                    setStartDateOpen(false)
-                    setEndDateOpen(false)
-                  }}
+                  id="location"
+                  placeholder="Select a location"
+                  styles={locationSelectCustomStyles}
+                  classNamePrefix="select"
+                  isClearable
+                  isSearchable
+                  name="color"
+                  options={locationSelectOptions}
                   value={location}
-                  onValueChange={(value: string) => {
-                    setLocation(value)
-                    value === "other"
-                      ? setShowOtherLocation(true)
-                      : setShowOtherLocation(false)
+                  onChange={(value: any) => setLocation(value)}
+                  required
+                  filterOption={(option, input) => {
+                    if (input) {
+                      return (
+                        option.label
+                          .toLowerCase()
+                          .includes(input.toLowerCase()) ||
+                        option.label === "Other"
+                      )
+                    }
+                    return true
                   }}
-                >
-                  <SelectTrigger
-                    className="border-none bg-black text-white ring-1 ring-[#333237] focus:ring-1 focus:ring-white focus:ring-offset-1 focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1"
-                    id="location"
-                  >
-                    <SelectValue
-                      placeholder="Select a location"
-                      id="select-value"
-                    />
-                  </SelectTrigger>
-                  <SelectContent
-                    className="border-none bg-black text-white ring-1 ring-[#333237]"
-                    position="popper"
-                  >
-                    <SelectItem
-                      className="hover:bg-gray-600"
-                      value="San Francisco, CA"
-                    >
-                      San Francisco, CA
-                    </SelectItem>
-                    <SelectItem
-                      className="hover:bg-gray-600"
-                      value="New York City, NY"
-                    >
-                      New York City, NY
-                    </SelectItem>
-                    <SelectItem
-                      className="hover:bg-gray-600"
-                      value="London, UK"
-                    >
-                      London, UK
-                    </SelectItem>
-                    <SelectItem className="hover:bg-gray-600" value="remote">
-                      Remote
-                    </SelectItem>
-                    <SelectItem className="hover:bg-gray-600" value="other">
-                      Other
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-                {showOtherLocation && (
-                  <Input
-                    onChange={(e: any) => setLocation(e.target.value)}
-                    className="border-none bg-black text-white ring-1 ring-[#333237] focus:ring-1 focus:ring-white focus:ring-offset-1 focus-visible:ring-1 focus-visible:ring-white focus-visible:ring-offset-1"
-                    style={{ marginTop: 8 }}
-                    id="other-location"
-                    placeholder="Enter the event location (City, State)"
-                    required
-                  />
-                )}
+                />
               </div>
               <div className="flex flex-col space-y-1">
                 <Label htmlFor="link-to-event" className="mb-2">
