@@ -121,8 +121,8 @@ export default function EventsColumn() {
       const mappedEventObj: EventType = {
         id: event.id,
         name: event.name,
-        startDateTime: event.startDateTime,
-        endDateTime: event.endDateTime,
+        startDateTime: new Date(event.startDateTime).toLocaleString(),
+        endDateTime: new Date(event.endDateTime).toLocaleString(),
         location: event.location,
         url: event.url,
         type: event.type,
@@ -139,8 +139,8 @@ export default function EventsColumn() {
       const mappedEventObj: FeaturedEventType = {
         id: event.id,
         name: event.name,
-        startDateTime: event.startDateTime,
-        endDateTime: event.endDateTime,
+        startDateTime: new Date(event.startDateTime).toLocaleString(),
+        endDateTime: new Date(event.endDateTime).toLocaleString(),
         featuredStartDate: event.featuredStartTime,
         featuredEndDate: event.featuredEndTime,
         location: event.location,
@@ -156,7 +156,7 @@ export default function EventsColumn() {
     return mappedEvents
   }
 
-  const fetchInitialData = async (dateRangeFilter?: DateRange) => {
+  const fetchInitialData = async () => {
     setIsLoading(true)
 
     const params = new URLSearchParams({

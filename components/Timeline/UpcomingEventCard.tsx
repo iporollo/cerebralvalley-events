@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react"
-import dynamic from "next/dynamic"
-import AirtableService from "@/src/services/airtable"
-import { AirtableTableUserColumns } from "@/src/utils/constants"
 import { mapCalEvent } from "@/src/utils/mappers/calEventMapper"
 import { buildShareUrl } from "@/src/utils/saveToCalendar"
-import { CalendarPlus, Heart } from "lucide-react"
-import { signIn, useSession } from "next-auth/react"
+import { CalendarPlus } from "lucide-react"
 import posthog from "posthog-js"
 
 import { Badge } from "@/components/ui/badge"
