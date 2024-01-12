@@ -121,8 +121,8 @@ export default function EventsColumn() {
       const mappedEventObj: EventType = {
         id: event.id,
         name: event.name,
-        startDateTime: new Date(event.startDateTime).toLocaleString(),
-        endDateTime: new Date(event.endDateTime).toLocaleString(),
+        startDateTime: new Date(event.startDateTime).toISOString(),
+        endDateTime: new Date(event.endDateTime).toISOString(),
         location: event.location,
         url: event.url,
         type: event.type,
@@ -139,8 +139,8 @@ export default function EventsColumn() {
       const mappedEventObj: FeaturedEventType = {
         id: event.id,
         name: event.name,
-        startDateTime: new Date(event.startDateTime).toLocaleString(),
-        endDateTime: new Date(event.endDateTime).toLocaleString(),
+        startDateTime: new Date(event.startDateTime).toISOString(),
+        endDateTime: new Date(event.endDateTime).toISOString(),
         featuredStartDate: event.featuredStartTime,
         featuredEndDate: event.featuredEndTime,
         location: event.location,
