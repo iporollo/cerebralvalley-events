@@ -219,13 +219,19 @@ export default function EventsColumn() {
     })
 
     if (from) {
-      const fromDate = format(new Date(from), "MM/dd/yyyy")
+      const fromDate = Math.floor(new Date(from).getTime() / 1000).toString()
       params.append("startDate", fromDate)
     }
 
     if (to) {
-      const toDate = format(new Date(to), "MM/dd/yyyy")
+      to.setHours(23, 59, 59, 999)
+      const toDate = Math.floor(to.getTime() / 1000).toString()
       params.append("endDate", toDate)
+    } else if (from && !to) {
+      const toDate = new Date(from!)
+      toDate.setDate(toDate.getDate() + 1)
+      const toDateUnix = Math.floor(toDate.getTime() / 1000).toString()
+      params.append("endDate", toDateUnix)
     }
 
     if (!from && !to) {
