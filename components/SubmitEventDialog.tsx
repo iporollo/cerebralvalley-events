@@ -126,7 +126,7 @@ export default function SubmitEventDialog() {
 
     if (response.ok) {
       console.log("Form submitted successfully")
-      toast("Event submitted.")
+      toast("Event submitted successfully.")
       clearState()
       setLoading(false)
       setOpen(false)
@@ -268,7 +268,7 @@ export default function SubmitEventDialog() {
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="feature-event"
-                  onClick={(e: any) => setFeatured(e.target.checked)}
+                  onClick={(e: any) => setFeatured(!featured)}
                   checked={featured}
                 />
                 <label
