@@ -152,7 +152,7 @@ export default function SubmitEventDialog() {
           Submit Event
         </DialogTrigger>
         <div style={{ overflow: "scroll" }}>
-          <DialogContent className="border-[#333237] bg-[#18171c]">
+          <DialogContent className="max-h-screen overflow-y-scroll border-[#333237] bg-[#18171c]">
             <DialogHeader>
               <DialogTitle>Submit Your Event</DialogTitle>
             </DialogHeader>
