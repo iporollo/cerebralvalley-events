@@ -6,6 +6,7 @@ import Script from "next/script"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/sonner"
 import PostHogProvider from "@/components/posthog-provider"
 import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   {children}
                 </div>
               </div>
+              <Toaster />
               <TailwindIndicator />
             </ThemeProvider>
           </body>

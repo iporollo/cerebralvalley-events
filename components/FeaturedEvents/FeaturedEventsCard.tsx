@@ -11,30 +11,30 @@ const FeaturedEventsCard = ({ event }: { event: FeaturedEventType }) => {
       onClick={(e) => {
         e.stopPropagation()
         posthog.capture("click-featured-event", {
-          event: event.event,
-          startDate: event.startDate,
-          endDate: event.endDate,
-          link: event.link,
+          event: event.name,
+          startDate: event.startDateTime,
+          endDate: event.endDateTime,
+          link: event.url,
         })
-        window.open(event.link, "_blank")
+        window.open(event.url, "_blank")
       }}
     >
       <div>
         <div
           className={"min-h-[8rem] md:min-h-[12rem]"}
           style={{
-            background: `url(${event.imageUri}) no-repeat center`,
+            background: `url(${event.imageLink}) no-repeat center`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
         <div className="border-[1px] border-x-[#e3e3e3]  border-b-[#d3d3d5] border-t-[#e7e7e9] bg-white p-3 text-[#717078] duration-200 dark:border-x-[#313035] dark:border-b-[#333237] dark:border-t-[rgba(64,63,68,1)] dark:bg-[#27262b]">
           <h2 className={"text-left text-sm font-bold dark:text-white"}>
-            {event.event.length > 55
-              ? `${event.event.substring(0, 55)}...`
-              : event.event}
+            {event.name.length > 55
+              ? `${event.name.substring(0, 55)}...`
+              : event.name}
           </h2>
-          {event.event.length <= 29 && <div className="m-[1.3rem]" />}
+          {event.name.length <= 29 && <div className="m-[1.3rem]" />}
           <div
             className="py-1 text-sm font-normal"
             style={{
@@ -62,23 +62,26 @@ const FeaturedEventsCard = ({ event }: { event: FeaturedEventType }) => {
                 <line x1="3" x2="21" y1="10" y2="10" />
               </svg>
               <span>
-                {isSameDay(new Date(event.startDate), new Date(event.endDate))
+                {isSameDay(
+                  new Date(event.startDateTime),
+                  new Date(event.endDateTime)
+                )
                   ? format(
                       utcToZonedTime(
-                        new Date(event.startDate),
+                        new Date(event.startDateTime),
                         "America/Los_Angeles"
                       ),
                       "MMM d"
                     )
                   : `${format(
                       utcToZonedTime(
-                        new Date(event.startDate),
+                        new Date(event.startDateTime),
                         "America/Los_Angeles"
                       ),
                       "MMM d"
                     )} - ${format(
                       utcToZonedTime(
-                        new Date(event.endDate),
+                        new Date(event.endDateTime),
                         "America/Los_Angeles"
                       ),
                       "MMM d"

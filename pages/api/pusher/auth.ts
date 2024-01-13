@@ -23,7 +23,7 @@ export default async function handler(
     let randomString = (Math.random() + 1).toString(36).substring(7)
 
     const presenceData = {
-      user_id: token?.sub || "anonymous" + randomString,
+      user_id: token?.sub || "anon" + randomString,
       user_info: {
         twitterHandle: token?.userProfile.twitterHandle || "",
         airtableRecordId: token?.userProfile.airtableRecordId || "",

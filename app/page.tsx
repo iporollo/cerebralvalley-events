@@ -1,9 +1,3 @@
-import Link from "next/link"
-
-import { siteConfig } from "@/config/site"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import EventsColumn from "@/components/EventsColumn"
 import FiltersColumn from "@/components/Filters/FiltersColumn"
 

@@ -9,27 +9,11 @@ enum AirtableTables {
 }
 
 enum AirtableTableEventViews {
-  ALL_EVENTS = "viwGjHO5VHWJMFaRn",
-  UPCOMING_EVENTS = "viwKfbSNjj5KeKtpD",
-  PAST_EVENTS = "viwzNbCT5E20LpmH5",
   FEATURED_EVENTS = "viwBMaTjADVshTW6P",
 }
 
 enum AirtableTableUserViews {
   ALL_DATA = "viwEmS7RLq50IuYBa",
-}
-
-enum AirtableTableEventColumns {
-  EVENT = "Event",
-  START = "Start",
-  END = "End",
-  LOCATION = "Location",
-  LINK = "Link",
-  TAGS = "Tags",
-  USERS_INTERESTED = "Users - Interested",
-  HANDLES_INTERESTED = "User Interested Handles",
-  AVATARS_INTERESTED = "User Interested Avatars",
-  IDS_INTERESTED = "User Interested Ids",
 }
 
 enum AirtableTableFeaturedEventColumns {
@@ -68,8 +52,8 @@ enum EventState {
 
 enum EventTypes {
   ALL = "ALL_EVENTS",
-  CO_WORKING = "Co-Working",
-  HACKATHON = "Hackathon",
+  COWORKING = "COWORKING",
+  HACKATHON = "HACKATHON",
 }
 
 enum LocationTypes {
@@ -130,7 +114,6 @@ export {
   AirtableTables,
   AirtableTableEventViews,
   AirtableTableUserViews,
-  AirtableTableEventColumns,
   AirtableTableFeaturedEventColumns,
   AirtableTableUserColumns,
   EventState,

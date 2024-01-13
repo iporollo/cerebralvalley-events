@@ -1,6 +1,6 @@
-export const mapCalEvent = (calEvent: EventType): AddToCalEvent => {
-  const startDate = new Date(calEvent.startDate)
-  const endDate = new Date(calEvent.endDate)
+export const mapCalEvent = (event: EventType): AddToCalEvent => {
+  const startDate = new Date(event.startDateTime)
+  const endDate = new Date(event.endDateTime)
   const timezoneOffsetMinutes = startDate.getTimezoneOffset()
   const timezone = `UTC${timezoneOffsetMinutes >= 0 ? "-" : "+"}${Math.abs(
     timezoneOffsetMinutes / 60
@@ -31,9 +31,9 @@ export const mapCalEvent = (calEvent: EventType): AddToCalEvent => {
     description: "",
     duration: duration,
     endDatetime: endDatetime,
-    location: calEvent.location,
+    location: event.location,
     startDatetime: startDatetime,
     timezone: timezone,
-    title: calEvent.event,
+    title: event.name,
   }
 }
