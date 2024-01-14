@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState } from "react"
+import Link from "next/link"
 import { BAY_AREA_CITIES } from "@/src/utils/constants"
-import { Loader } from "lucide-react"
+import { ArrowLeft, Loader } from "lucide-react"
 import DatePicker from "react-datepicker"
 import Select from "react-select"
 import { toast } from "sonner"
@@ -131,6 +132,14 @@ export default function SubmitEventPageForm() {
 
   return (
     <div className="m-auto w-3/4 py-6 md:w-1/2 xl:w-[35%]">
+      <div className="pb-2">
+        <Link href="/" className="flex">
+          <span className="text-md flex cursor-pointer items-center text-gray-400 hover:text-gray-200">
+            <ArrowLeft size={20} />
+            Back
+          </span>
+        </Link>
+      </div>
       <div className="pb-6">
         <h1 className="mb-2 text-3xl">Cerebral Valley Event Submission</h1>
         <h2 className="text-md text-gray-400">
