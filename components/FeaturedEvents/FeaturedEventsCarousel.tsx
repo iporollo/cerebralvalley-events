@@ -34,19 +34,27 @@ export const FeaturedEventsCarousel = ({
     return () => window.removeEventListener("resize", handleResize)
   }, [events])
 
+  const getSliderClassName = (eventCount: number) => {
+    let widthClass = "max-w-[900px]"
+
+    if (eventCount === 1) {
+      widthClass = "w-[250px]"
+    } else if (eventCount === 2) {
+      widthClass = "w-[280px] md:w-[500px] lg:w-[500px]"
+    } else if (eventCount >= 3) {
+      widthClass = "w-[280px] md:w-[450px] lg:w-[600px] xl:w-[740px]"
+    }
+
+    return `${widthClass} md:overflow-hidden`
+  }
+
   var sliderSettings = {
     dots: false,
     arrows: slidesToShow === 1,
     infinite: true,
     fade: false,
     pauseOnHover: false,
-    className: `w-full ${
-      slidesToShow === 3
-        ? "w-[794px]"
-        : slidesToShow === 1
-        ? "max-w-[280px]"
-        : "max-w-[794px]"
-    } md:overflow-hidden`,
+    className: getSliderClassName(events.length),
     autoplay: true,
     autoplaySpeed: 6000,
     speed: 1000,

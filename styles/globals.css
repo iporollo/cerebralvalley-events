@@ -154,10 +154,6 @@
   color: white !important; /* Change 'blue' to your desired color for the active dot */
 }
 
-.slick-track {
-  width: 250px !important;
-}
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
