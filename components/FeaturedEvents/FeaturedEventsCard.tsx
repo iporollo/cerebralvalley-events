@@ -30,8 +30,8 @@ const FeaturedEventsCard = ({ event }: { event: FeaturedEventType }) => {
         />
         <div className="border-[1px] border-x-[#e3e3e3]  border-b-[#d3d3d5] border-t-[#e7e7e9] bg-white p-3 text-[#717078] duration-200 dark:border-x-[#313035] dark:border-b-[#333237] dark:border-t-[rgba(64,63,68,1)] dark:bg-[#27262b]">
           <h2 className={"text-left text-sm font-bold dark:text-white"}>
-            {event.name.length > 55
-              ? `${event.name.substring(0, 55)}...`
+            {event.name.length > 49
+              ? `${event.name.substring(0, 49)}...`
               : event.name}
           </h2>
           {event.name.length <= 29 && <div className="m-[1.3rem]" />}
