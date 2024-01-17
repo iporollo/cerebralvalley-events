@@ -54,7 +54,7 @@ export default function EventsColumn() {
             case LocationTypes.REMOTE:
               return event.location === "Remote"
             case LocationTypes.NYC:
-              return event.location === "New York, NY"
+              return event.location === "New York City, NY"
             case LocationTypes.LONDON:
               return event.location === "London, UK"
           }

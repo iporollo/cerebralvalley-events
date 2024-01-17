@@ -59,7 +59,7 @@ enum EventTypes {
 enum LocationTypes {
   ALL = "ALL_LOCATIONS",
   BAY_AREA = "BAY_AREA",
-  NYC = "New York, NY",
+  NYC = "New York City, NY",
   LONDON = "London, UK",
   REMOTE = "Remote",
 }
