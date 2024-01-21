@@ -102,6 +102,20 @@ export default function SubmitEventPageForm() {
     event.preventDefault()
     setLoading(true)
 
+    const formatToPST = (date: Date) => {
+      return `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()} ${String(date.getHours()).padStart(2, "0")}:${String(
+        date.getMinutes()
+      ).padStart(2, "0")}:${String(date.getSeconds()).padStart(
+        2,
+        "0"
+      )} GMT-0800 (Pacific Standard Time)`
+    }
+
+    const startDatePST = formatToPST(startDate!)
+    const endDatePST = formatToPST(endDate!)
+
     const response = await fetch("/api/events/submit", {
       method: "POST",
       headers: {
@@ -110,8 +124,8 @@ export default function SubmitEventPageForm() {
       body: JSON.stringify({
         email,
         name,
-        startDate,
-        endDate,
+        startDate: startDatePST,
+        endDate: endDatePST,
         location: location?.value,
         link,
         featured,
