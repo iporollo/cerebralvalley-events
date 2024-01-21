@@ -154,6 +154,11 @@
   color: white !important; /* Change 'blue' to your desired color for the active dot */
 }
 
+@screen md {
+  .slick-next {
+    right: 10px !important;
+  }
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

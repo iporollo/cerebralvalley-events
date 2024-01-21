@@ -50,7 +50,7 @@ export const FeaturedEventsCarousel = ({
 
   var sliderSettings = {
     dots: false,
-    arrows: slidesToShow === 1,
+    arrows: true,
     infinite: true,
     fade: false,
     pauseOnHover: false,
