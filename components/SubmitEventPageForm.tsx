@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import Link from "next/link"
 import { BAY_AREA_CITIES } from "@/src/utils/constants"
 import { ArrowLeft, Loader } from "lucide-react"
+import posthog from "posthog-js"
 import DatePicker from "react-datepicker"
 import Select from "react-select"
 import { toast } from "sonner"
@@ -100,6 +101,7 @@ export default function SubmitEventPageForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    posthog.capture("submit-event-page")
     setLoading(true)
 
     const formatToPST = (date: Date) => {

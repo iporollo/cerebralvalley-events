@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { BAY_AREA_CITIES } from "@/src/utils/constants"
 import { Loader, Plus } from "lucide-react"
+import posthog from "posthog-js"
 import DatePicker from "react-datepicker"
 import Select from "react-select"
 import { toast } from "sonner"
@@ -106,6 +107,7 @@ export default function SubmitEventDialog() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    posthog.capture("submit-event-dialog")
     setLoading(true)
 
     const formatToPST = (date: Date) => {
