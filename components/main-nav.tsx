@@ -21,9 +21,9 @@ export function MainNav({ items }: MainNavProps) {
       </Link>
       {items?.length ? (
         <nav className="hidden gap-6 sm:flex">
-          {items?.map(
-            (item, index) =>
-              item.href && (
+          {items?.map((item, index) =>
+            item.href ? (
+              item.title === "Google Sheet" ? (
                 <Link
                   key={index}
                   href={item.href}
@@ -40,7 +40,19 @@ export function MainNav({ items }: MainNavProps) {
                 >
                   {item.title}
                 </Link>
+              ) : (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center text-sm font-medium text-gray-400 duration-300 hover:text-white",
+                    item.disabled && "cursor-not-allowed opacity-80"
+                  )}
+                >
+                  {item.title}
+                </Link>
               )
+            ) : null
           )}
         </nav>
       ) : null}
