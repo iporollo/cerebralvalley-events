@@ -15,8 +15,8 @@ export const siteConfig: SiteConfig = {
   description: "Tracking the latest AI events happening around the world.",
   mainNav: [
     {
-      title: "News",
-      href: "https://cerebralvalley.ai/news",
+      title: "Blog",
+      href: "https://cerebralvalley.ai/blog",
     },
     {
       title: "Jobs",
