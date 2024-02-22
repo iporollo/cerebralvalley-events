@@ -22,7 +22,6 @@ export default function StackedAvatarList({
     ) || []
   if (!cleanPeople || cleanPeople.length === 0) {
     return null
-    return null
   } else if (cleanPeople.length < numAvatars + 2) {
     return (
       <div className="flex -space-x-2 overflow-hidden">
@@ -43,11 +42,13 @@ export default function StackedAvatarList({
     const sortedPeople = cleanPeople.sort(
       (a, b) => b.followerCount! - a.followerCount!
     )
-    const remainingImages = sortedPeople.length - numAvatars
-    const firstThree = sortedPeople.slice(0, numAvatars)
+
+    const avatarsToShow = sortedPeople.slice(0, numAvatars)
+    const remainingAvatars = sortedPeople.length - numAvatars
+
     return (
       <div className="flex items-center -space-x-2 overflow-hidden">
-        {firstThree.map((p) => (
+        {avatarsToShow.map((p) => (
           <Avatar
             key={`${p.avatar || p.handle}${eventId}`}
             className={`inline-block h-${iconSize} w-${iconSize} rounded-full`}
@@ -59,7 +60,7 @@ export default function StackedAvatarList({
         <div
           className={`flex h-${iconSize} w-${iconSize} items-center justify-center rounded-full bg-gray-700`}
         >
-          <span className="text-xs">{`+${remainingImages}`}</span>
+          <span className="text-xs">{`+${remainingAvatars}`}</span>
         </div>
       </div>
     )
