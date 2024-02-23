@@ -44,7 +44,7 @@ export default function StackedAvatarList({
     )
 
     const avatarsToShow = sortedPeople.slice(0, numAvatars)
-    const remainingAvatars = sortedPeople.length - numAvatars
+    const remainingAvatars = Math.min(sortedPeople.length - numAvatars, 99) // max 99 remaining avatars so the UI doesn't get too crowded
 
     return (
       <div className="flex items-center -space-x-2 overflow-hidden">
