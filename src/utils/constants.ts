@@ -61,6 +61,7 @@ enum LocationTypes {
   BAY_AREA = "BAY_AREA",
   NYC = "New York City, NY",
   LONDON = "London, UK",
+  SEATTLE = "Seattle, WA",
   REMOTE = "Remote",
 }
 

@@ -25,6 +25,7 @@ const locationSelectOptions = [
   ...bayAreaOptions,
   { value: "New York City, NY", label: "New York City, NY" },
   { value: "London, UK", label: "London, UK" },
+  { value: "Seattle, WA", label: "Seattle, WA" },
   { value: "Remote", label: "Remote" },
   { value: "Other", label: "Other" },
 ]

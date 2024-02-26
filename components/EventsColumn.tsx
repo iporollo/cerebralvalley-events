@@ -57,6 +57,8 @@ export default function EventsColumn() {
               return event.location === "New York City, NY"
             case LocationTypes.LONDON:
               return event.location === "London, UK"
+            case LocationTypes.SEATTLE:
+              return event.location === "Seattle, WA"
           }
         })
       })
