@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 import { BAY_AREA_CITIES } from "@/src/utils/constants"
+import { format } from "date-fns"
+import { utcToZonedTime } from "date-fns-tz"
 import { Loader, Plus } from "lucide-react"
 import posthog from "posthog-js"
 import DatePicker from "react-datepicker"
@@ -111,19 +113,16 @@ export default function SubmitEventDialog() {
     posthog.capture("submit-event-dialog")
     setLoading(true)
 
-    const formatToPST = (date: Date) => {
-      return `${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${date.getDate()} ${String(date.getHours()).padStart(2, "0")}:${String(
-        date.getMinutes()
-      ).padStart(2, "0")}:${String(date.getSeconds()).padStart(
-        2,
-        "0"
-      )} GMT-0800 (Pacific Standard Time)`
+    const formatToPT = (date: Date) => {
+      const ptDate = utcToZonedTime(date, "America/Los_Angeles")
+      return format(ptDate, "yyyy-MM-dd HH:mm:ss xxx", {
+        // @ts-ignore
+        timeZone: "America/Los_Angeles",
+      })
     }
 
-    const startDatePST = formatToPST(startDate!)
-    const endDatePST = formatToPST(endDate!)
+    const startDatePT = formatToPT(startDate!)
+    const endDatePT = formatToPT(endDate!)
 
     const response = await fetch("/api/events/submit", {
       method: "POST",
@@ -133,8 +132,8 @@ export default function SubmitEventDialog() {
       body: JSON.stringify({
         email,
         name,
-        startDate: startDatePST,
-        endDate: endDatePST,
+        startDate: startDatePT,
+        endDate: endDatePT,
         location: location?.value,
         link,
         featured,
@@ -207,7 +206,7 @@ export default function SubmitEventDialog() {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="flex flex-col space-y-1">
                   <Label htmlFor="start-date-time" className="mb-2">
-                    Start Date/Time (PST) *
+                    Start Date/Time (PT) *
                   </Label>
                   <DatePicker
                     selected={startDate}
@@ -224,7 +223,7 @@ export default function SubmitEventDialog() {
                 </div>
                 <div className="flex flex-col space-y-1">
                   <Label htmlFor="end-date-time" className="mb-2">
-                    End Date/Time (PST) *
+                    End Date/Time (PT) *
                   </Label>
                   <DatePicker
                     selected={endDate}
